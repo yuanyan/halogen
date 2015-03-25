@@ -1,0 +1,30 @@
+{
+  "name": "react-timesheet",
+  "main": "dist/react-timesheet.min.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/yuanyan/react-timesheet",
+  "authors": [
+    "Yuanyan Cao"
+  ],
+  "description": "Time Sheet Component for React",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "timesheet"
+  ],
+  "license": "MIT",
+  "ignore": [
+    ".editorconfig",
+    ".gitignore",
+    "package.json",
+    "src",
+    "node_modules",
+    "example",
+    "test"
+  ]
+}
