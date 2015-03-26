@@ -1,3 +1,4 @@
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var React = require('react');
 
 var selfCleaningTimeout = {
@@ -11,7 +12,7 @@ var selfCleaningTimeout = {
     }
 };
 
-var ComponentPreview = React.createClass({
+var ComponentPreview = React.createClass({displayName: "ComponentPreview",
     propTypes: {
         code: React.PropTypes.string.isRequired
     },
@@ -19,7 +20,7 @@ var ComponentPreview = React.createClass({
     mixins: [selfCleaningTimeout],
 
     render: function() {
-        return <div ref="mount" />;
+        return React.createElement("div", {ref: "mount"});
     },
 
     componentDidMount: function() {
@@ -56,7 +57,7 @@ var ComponentPreview = React.createClass({
         } catch (err) {
             this.setTimeout(function() {
                 React.render(
-                    <div className="playgroundError">{err.toString()}</div>,
+                    React.createElement("div", {className: "playgroundError"}, err.toString()),
                     mountNode
                 );
             }, 500);
@@ -74,7 +75,7 @@ var IS_MOBILE = (
     || navigator.userAgent.match(/Windows Phone/i)
     );
 
-var CodeMirrorEditor = React.createClass({
+var CodeMirrorEditor = React.createClass({displayName: "CodeMirrorEditor",
     componentDidMount: function() {
         if (IS_MOBILE) return;
 
@@ -106,20 +107,20 @@ var CodeMirrorEditor = React.createClass({
         var editor;
 
         if (IS_MOBILE) {
-            editor = <pre style={{overflow: 'scroll'}}>{this.props.codeText}</pre>;
+            editor = React.createElement("pre", {style: {overflow: 'scroll'}}, this.props.codeText);
         } else {
-            editor = <textarea ref="editor" defaultValue={this.props.codeText} />;
+            editor = React.createElement("textarea", {ref: "editor", defaultValue: this.props.codeText});
         }
 
         return (
-            <div style={this.props.style} className={this.props.className}>
-            {editor}
-            </div>
+            React.createElement("div", {style: this.props.style, className: this.props.className}, 
+            editor
+            )
             );
     }
 });
 
-var ReactPlayground = React.createClass({
+var ReactPlayground = React.createClass({displayName: "ReactPlayground",
     propTypes: {
         codeText: React.PropTypes.string.isRequired
     },
@@ -137,17 +138,17 @@ var ReactPlayground = React.createClass({
     },
 
     render: function() {
-        return <div className="playground">
-            <div className="playgroundCode">
-                <CodeMirrorEditor key="jsx"
-                onChange={this.handleCodeChange}
-                className="playgroundStage"
-                codeText={this.state.code} />
-            </div>
-            <div className="playgroundPreview">
-                <ComponentPreview code={this.state.code} />
-            </div>
-        </div>;
+        return React.createElement("div", {className: "playground"}, 
+            React.createElement("div", {className: "playgroundCode"}, 
+                React.createElement(CodeMirrorEditor, {key: "jsx", 
+                onChange: this.handleCodeChange, 
+                className: "playgroundStage", 
+                codeText: this.state.code})
+            ), 
+            React.createElement("div", {className: "playgroundPreview"}, 
+                React.createElement(ComponentPreview, {code: this.state.code})
+            )
+        );
     }
 });
 
@@ -155,8 +156,10 @@ for(var id=1; id<10; id++){
     var example = document.getElementById('example'+id);
     if(example){
         React.render(
-            <ReactPlayground codeText={document.getElementById('code'+id).innerHTML} />,
+            React.createElement(ReactPlayground, {codeText: document.getElementById('code'+id).innerHTML}),
             example
         );
     }
 }
+
+},{"react":undefined}]},{},[1]);
