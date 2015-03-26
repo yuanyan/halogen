@@ -25,9 +25,9 @@ var browserify = require('browserify'),
 var SRC_PATH = 'src';
 var DIST_PATH = 'dist';
 
-var COMPONENT_NAME = 'Loaders';
+var COMPONENT_NAME = 'Halogen';
 var PACKAGE_FILE =  COMPONENT_NAME + '.js';
-var PACKAGE_NAME = 'react-' + COMPONENT_NAME.toLowerCase();
+var PACKAGE_NAME = COMPONENT_NAME.toLowerCase();
 
 var DEPENDENCIES = ['react'];
 

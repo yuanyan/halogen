@@ -1,13 +1,13 @@
 {
-  "name": "react-loaders",
+  "name": "halogen",
   "version": "0.1.0",
   "description": "Delightful and performance-focused pure css loading animations.",
-  "main": "src/Loaders.js",
+  "main": "src/Halogen.js",
   "author": "Yuanyan Cao",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yuanyan/react-loaders.git"
+    "url": "https://github.com/yuanyan/halogen.git"
   },
   "dependencies": {
     "react": "^0.12.0",
@@ -48,6 +48,7 @@
     "react",
     "react-component",
     "loader",
-    "spinner"
+    "spinner",
+    "halogen"
   ]
 }

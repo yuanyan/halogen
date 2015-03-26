@@ -124,7 +124,7 @@ header:before {
   text-rendering: optimizeLegibility;
 }
 .logo:before {
-  content: "L";
+  content: "H";
   font-size: 140px;
   position: absolute;
   right: 0;
