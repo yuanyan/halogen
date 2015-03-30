@@ -1,9 +1,14 @@
 module.exports = {
     BallPulseLoader: require('./BallPulseLoader'),
+    BallRotateLoader: require('./BallRotateLoader'),
+    BallBeatLoader: require('./BallBeatLoader'),
+    BallPulseRiseLoader: require('./BallPulseRiseLoader'),
+    BallPulseSyncLoader: require('./BallPulseSyncLoader'),
     BallGridPulseLoader: require('./BallGridPulseLoader'),
     BallClipRotateLoader: require('./BallClipRotateLoader'),
-    SquareSpinLoader: require('./SquareSpinLoader'),
+    SquareLoader: require('./SquareLoader'),
     PacmanLoader: require('./PacmanLoader'),
-    LineSpinFadeLoader: require('./LineSpinFadeLoader'),
+    TriangleSkewLoader: require('./TriangleSkewLoader'),
+    LineFadeLoader: require('./LineFadeLoader'),
     LineScaleLoader: require('./LineScaleLoader')
 };
