@@ -80,7 +80,7 @@ var CodeMirrorEditor = React.createClass({
 
         this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
             mode: 'javascript',
-            lineNumbers: true,
+            //lineNumbers: true,
             lineWrapping: true,
             smartIndent: false,  // javascript mode does bad things with jsx indents
             matchBrackets: true,
@@ -136,18 +136,37 @@ var ReactPlayground = React.createClass({
         });
     },
 
+    changeTab: function(){
+        if(this.state.tab == 'preview')
+            this.setState({
+                tab: 'edit'
+            })
+        else
+            this.setState({
+                tab: 'preview'
+            })
+    },
+
     render: function() {
-        return <div className="playground">
-            <div className="playgroundCode">
-                <CodeMirrorEditor key="jsx"
-                onChange={this.handleCodeChange}
-                className="playgroundStage"
-                codeText={this.state.code} />
-            </div>
-            <div className="playgroundPreview">
-                <ComponentPreview code={this.state.code} />
-            </div>
+
+        var tabText = this.state.tab == 'preview'? 'Live Preview': 'Live Edit';
+        var code = <div className="playgroundCode">
+            <CodeMirrorEditor key="jsx"
+            onChange={this.handleCodeChange}
+            className="playgroundStage"
+            codeText={this.state.code} />
         </div>;
+
+        var preview = <div className="playgroundPreview">
+            <ComponentPreview code={this.state.code} />
+        </div>
+
+        return (
+         <div className="playground">
+            <div className="playgroundTab" onClick={this.changeTab}>{tabText}</div>
+            {this.state.tab == 'preview'? code: preview}
+         </div>
+      );
     }
 });
 

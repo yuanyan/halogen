@@ -1,7 +1,7 @@
 Halogen
 =======
 
-Delightful and performance-focused pure css loading animations. Inspired by loaders.css(http://connoratherton.com/loaders)
+Delightful and performance-focused pure css loading animations. Inspired by [loaders.css](http://connoratherton.com/loaders)
 
 ## Demo & Examples
 
