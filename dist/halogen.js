@@ -1,5 +1,22 @@
-require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-var React = require('react');
+!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Halogen=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+module.exports = {
+    BallPulseLoader: require('./BallPulseLoader'),
+    BallRotateLoader: require('./BallRotateLoader'),
+    BallBeatLoader: require('./BallBeatLoader'),
+    BallPulseRiseLoader: require('./BallPulseRiseLoader'),
+    BallPulseSyncLoader: require('./BallPulseSyncLoader'),
+    BallGridPulseLoader: require('./BallGridPulseLoader'),
+    BallClipRotateLoader: require('./BallClipRotateLoader'),
+    SquareLoader: require('./SquareLoader'),
+    PacmanLoader: require('./PacmanLoader'),
+    TriangleSkewLoader: require('./TriangleSkewLoader'),
+    LineFadeLoader: require('./LineFadeLoader'),
+    LineScaleLoader: require('./LineScaleLoader')
+};
+
+},{"./BallBeatLoader":2,"./BallClipRotateLoader":3,"./BallGridPulseLoader":4,"./BallPulseLoader":5,"./BallPulseRiseLoader":6,"./BallPulseSyncLoader":7,"./BallRotateLoader":8,"./LineFadeLoader":9,"./LineScaleLoader":10,"./PacmanLoader":11,"./SquareLoader":12,"./TriangleSkewLoader":13}],2:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -70,8 +87,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],2:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],3:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -139,8 +158,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],3:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],4:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -231,8 +252,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],4:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],5:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -307,8 +330,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],5:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],6:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -411,8 +436,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],6:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],7:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -485,8 +512,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],7:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],8:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -573,8 +602,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],8:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],9:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -705,8 +736,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],9:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],10:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -785,8 +818,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],10:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],11:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -892,9 +927,11 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],11:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],12:[function(require,module,exports){
+(function (global){
 
-var React = require('react');
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -963,8 +1000,10 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],12:[function(require,module,exports){
-var React = require('react');
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],13:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
@@ -1035,7 +1074,8 @@ var Loader = React.createClass({displayName: "Loader",
 
 module.exports = Loader;
 
-},{"./assign":13,"./insertKeyframesRule":14,"react":undefined}],13:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":14,"./insertKeyframesRule":15}],14:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1083,7 +1123,7 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var insertRule = require('./insertRule');
 
 var vendorPrefix = '-webkit-';
@@ -1112,7 +1152,7 @@ function insertKeyframesRule(keyframes) {
 }
 
 module.exports = insertKeyframesRule;
-},{"./insertRule":15}],15:[function(require,module,exports){
+},{"./insertRule":16}],16:[function(require,module,exports){
 'use strict';
 
 var extraSheet;
@@ -1132,20 +1172,5 @@ function insertRule(css) {
 }
 
 module.exports = insertRule;
-},{}],"halogen":[function(require,module,exports){
-module.exports = {
-    BallPulseLoader: require('./BallPulseLoader'),
-    BallRotateLoader: require('./BallRotateLoader'),
-    BallBeatLoader: require('./BallBeatLoader'),
-    BallPulseRiseLoader: require('./BallPulseRiseLoader'),
-    BallPulseSyncLoader: require('./BallPulseSyncLoader'),
-    BallGridPulseLoader: require('./BallGridPulseLoader'),
-    BallClipRotateLoader: require('./BallClipRotateLoader'),
-    SquareLoader: require('./SquareLoader'),
-    PacmanLoader: require('./PacmanLoader'),
-    TriangleSkewLoader: require('./TriangleSkewLoader'),
-    LineFadeLoader: require('./LineFadeLoader'),
-    LineScaleLoader: require('./LineScaleLoader')
-};
-
-},{"./BallBeatLoader":1,"./BallClipRotateLoader":2,"./BallGridPulseLoader":3,"./BallPulseLoader":4,"./BallPulseRiseLoader":5,"./BallPulseSyncLoader":6,"./BallRotateLoader":7,"./LineFadeLoader":8,"./LineScaleLoader":9,"./PacmanLoader":10,"./SquareLoader":11,"./TriangleSkewLoader":12}]},{},[]);
+},{}]},{},[1])(1)
+});
