@@ -81,7 +81,7 @@ var CodeMirrorEditor = React.createClass({displayName: "CodeMirrorEditor",
 
         this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
             mode: 'javascript',
-            lineNumbers: true,
+            //lineNumbers: true,
             lineWrapping: true,
             smartIndent: false,  // javascript mode does bad things with jsx indents
             matchBrackets: true,
@@ -137,18 +137,37 @@ var ReactPlayground = React.createClass({displayName: "ReactPlayground",
         });
     },
 
+    changeTab: function(){
+        if(this.state.tab == 'preview')
+            this.setState({
+                tab: 'edit'
+            })
+        else
+            this.setState({
+                tab: 'preview'
+            })
+    },
+
     render: function() {
-        return React.createElement("div", {className: "playground"}, 
-            React.createElement("div", {className: "playgroundCode"}, 
-                React.createElement(CodeMirrorEditor, {key: "jsx", 
-                onChange: this.handleCodeChange, 
-                className: "playgroundStage", 
-                codeText: this.state.code})
-            ), 
-            React.createElement("div", {className: "playgroundPreview"}, 
-                React.createElement(ComponentPreview, {code: this.state.code})
-            )
+
+        var tabText = this.state.tab == 'preview'? 'Live Preview': 'Live Edit';
+        var code = React.createElement("div", {className: "playgroundCode"}, 
+            React.createElement(CodeMirrorEditor, {key: "jsx", 
+            onChange: this.handleCodeChange, 
+            className: "playgroundStage", 
+            codeText: this.state.code})
         );
+
+        var preview = React.createElement("div", {className: "playgroundPreview"}, 
+            React.createElement(ComponentPreview, {code: this.state.code})
+        )
+
+        return (
+         React.createElement("div", {className: "playground"}, 
+            React.createElement("div", {className: "playgroundTab", onClick: this.changeTab}, tabText), 
+            this.state.tab == 'preview'? code: preview
+         )
+      );
     }
 });
 

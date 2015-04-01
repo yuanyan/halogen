@@ -864,7 +864,7 @@ var Loader = React.createClass({displayName: "Loader",
                 {
                     width: 10,
                     height: 10,
-                    transform: 'translate(0, '+ -this.props.size / 4 + ')',
+                    transform: 'translate(0, '+ -this.props.size / 4 + 'px)',
                     position: 'absolute',
                     top: 25,
                     left: 100
