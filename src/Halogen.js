@@ -8,6 +8,8 @@ module.exports = {
     BallClipRotateLoader: require('./BallClipRotateLoader'),
     SquareLoader: require('./SquareLoader'),
     PacmanLoader: require('./PacmanLoader'),
+    MoonLoader: require('./MoonLoader'),
+    RingLoader: require('./RingLoader'),
     TriangleSkewLoader: require('./TriangleSkewLoader'),
     LineFadeLoader: require('./LineFadeLoader'),
     LineScaleLoader: require('./LineScaleLoader')
