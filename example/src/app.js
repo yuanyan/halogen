@@ -81,6 +81,7 @@ var CodeMirrorEditor = React.createClass({
         this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
             mode: 'javascript',
             //lineNumbers: true,
+            viewportMargin: Infinity,
             lineWrapping: true,
             smartIndent: false,  // javascript mode does bad things with jsx indents
             matchBrackets: true,

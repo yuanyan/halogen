@@ -2,27 +2,25 @@ var React = require('react');
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
-var rightRotateKeyframes = {
-    '0%': {
-        transform: 'perspective(1000px) rotate3d(1, 1, 1, 0deg)'
-    },
+var rotateKeyframes = {
     '100%': {
-        transform: 'perspective(1000px) rotate3d(1, 1, 1, 360deg)'
-    }
-};
-
-var leftRotateKeyframes = {
-    '0%': {
-        transform: 'perspective(1000px) rotate3d(-1, -1, -1, 0deg)'
-    },
-    '100%': {
-        transform: 'perspective(1000px) rotate3d(-1, -1, -1, 360deg)'
+        transform: 'rotate(360deg)'
     }
 };
 
 
-var rightRotateAnimationName = insertKeyframesRule(rightRotateKeyframes);
-var leftRotateAnimationName = insertKeyframesRule(leftRotateKeyframes);
+var bounceKeyframes = {
+    '0%, 100%': {
+        transform: 'scale(0)'
+    },
+    '50%': {
+        transform: 'scale(1.0)'
+    }
+};
+
+
+var rotateAnimationName = insertKeyframesRule(rotateKeyframes);
+var bounceAnimationName = insertKeyframesRule(bounceKeyframes);
 
 var Loader = React.createClass({
     propTypes: {
@@ -36,18 +34,17 @@ var Loader = React.createClass({
             size: '60px'
         };
     },
-    getCircleStyle: function (size) {
+    getBallStyle: function (size) {
         return {
+            backgroundColor: this.props.color,
             width: size,
             height: size,
-            border: size/10 +'px solid ' + this.props.color,
-            opacity: 0.4,
             borderRadius: '100%'
         }
     },
     getAnimationStyle: function (i) {
 
-        var animation = [i==1?rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
+        var animation = [i==0? rotateAnimationName: bounceAnimationName, '2s', i==2? '-1s': '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
         return {
             animation: animation,
@@ -58,23 +55,26 @@ var Loader = React.createClass({
     },
     getStyle: function (i) {
         var size = parseInt(this.props.size);
+        var ballSize = size/2;
         if(i) {
             return assign(
-                this.getCircleStyle(size),
+                this.getBallStyle(ballSize),
                 this.getAnimationStyle(i),
                 {
                     position: 'absolute',
-                    top: 0,
-                    left: 0
+                    top: i%2? 0: 'auto',
+                    bottom: i%2? 'auto': 0
                 }
             )
         }else{
-            return {
-                width: size,
-                height: size,
-                position: 'relative'
-            }
-
+            return assign(
+                this.getAnimationStyle(i),
+                {
+                    width: size,
+                    height: size,
+                    position: 'relative'
+                }
+            )
         }
 
     },
