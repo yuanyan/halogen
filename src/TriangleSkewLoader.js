@@ -12,7 +12,7 @@ var keyframes = {
     '75%': {
         transform: 'perspective(100px) rotateX(0) rotateY(180deg)'
     },
-    '75%': {
+    '100%': {
         transform: 'perspective(100px) rotateX(0) rotateY(0)'
     }
 };
