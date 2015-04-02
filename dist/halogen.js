@@ -9,12 +9,14 @@ module.exports = {
     BallClipRotateLoader: require('./BallClipRotateLoader'),
     SquareLoader: require('./SquareLoader'),
     PacmanLoader: require('./PacmanLoader'),
+    MoonLoader: require('./MoonLoader'),
+    RingLoader: require('./RingLoader'),
     TriangleSkewLoader: require('./TriangleSkewLoader'),
     LineFadeLoader: require('./LineFadeLoader'),
     LineScaleLoader: require('./LineScaleLoader')
 };
 
-},{"./BallBeatLoader":2,"./BallClipRotateLoader":3,"./BallGridPulseLoader":4,"./BallPulseLoader":5,"./BallPulseRiseLoader":6,"./BallPulseSyncLoader":7,"./BallRotateLoader":8,"./LineFadeLoader":9,"./LineScaleLoader":10,"./PacmanLoader":11,"./SquareLoader":12,"./TriangleSkewLoader":13}],2:[function(require,module,exports){
+},{"./BallBeatLoader":2,"./BallClipRotateLoader":3,"./BallGridPulseLoader":4,"./BallPulseLoader":5,"./BallPulseRiseLoader":6,"./BallPulseSyncLoader":7,"./BallRotateLoader":8,"./LineFadeLoader":9,"./LineScaleLoader":10,"./MoonLoader":11,"./PacmanLoader":12,"./RingLoader":13,"./SquareLoader":14,"./TriangleSkewLoader":15}],2:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -88,7 +90,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],3:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],3:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -159,7 +161,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],4:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],4:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -253,7 +255,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],5:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],5:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -331,7 +333,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],6:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],6:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -437,7 +439,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],7:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],7:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -513,7 +515,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],8:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],8:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -603,7 +605,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],9:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],9:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -737,7 +739,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],10:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],10:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -819,7 +821,97 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],11:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],11:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
+var assign = require('./assign');
+var insertKeyframesRule = require('./insertKeyframesRule');
+
+var keyframes = {
+    '100%': {
+        transform: 'rotate(360deg)'
+    }
+};
+
+
+var animationName = insertKeyframesRule(keyframes);
+
+var Loader = React.createClass({displayName: "Loader",
+    propTypes: {
+        color: React.PropTypes.string,
+        size: React.PropTypes.string,
+        margin: React.PropTypes.string
+    },
+    getDefaultProps: function(){
+        return {
+            color: '#ffffff',
+            size: '60px'
+        };
+    },
+    getBallStyle: function (size) {
+        return {
+            width: size,
+            height: size,
+            borderRadius: '100%'
+        }
+    },
+    getAnimationStyle: function (i) {
+
+        var animation = [animationName, '0.6s', '0s', 'infinite', 'linear'].join(' ');
+        var animationFillMode = 'forwards';
+        return {
+            animation: animation,
+            WebkitAnimation: animation,
+            animationFillMode: animationFillMode,
+            WebkitAnimationFillMode: animationFillMode
+        }
+    },
+    getStyle: function (i) {
+        var size = parseInt(this.props.size);
+        var moonSize = size/7;
+        if(i == 1) {
+            return assign(
+                this.getBallStyle(moonSize),
+                this.getAnimationStyle(i),
+                {
+                    backgroundColor: this.props.color,
+                    opacity: '0.8',
+                    position: 'absolute',
+                    top: size/2 - moonSize/2
+                }
+            )
+        }else if(i == 2){
+            return assign(
+                this.getBallStyle(size),
+                {
+                    border: moonSize +'px solid ' + this.props.color,
+                    opacity: 0.1
+                }
+            );
+        }else{
+            return assign(
+                this.getAnimationStyle(i),
+                {
+                    position: 'relative'
+                }
+            )
+        }
+
+    },
+    render: function () {
+
+        return (
+            React.createElement("div", {style: this.getStyle(0)}, 
+                React.createElement("div", {style: this.getStyle(1)}), 
+                React.createElement("div", {style: this.getStyle(2)})
+            ));
+    }
+});
+
+module.exports = Loader;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":16,"./insertKeyframesRule":17}],12:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -928,7 +1020,102 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],12:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],13:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
+var assign = require('./assign');
+var insertKeyframesRule = require('./insertKeyframesRule');
+
+var keyframes = {
+    '0%': {
+        transform: 'perspective(1000px) rotate3d(1, 1, 1, 0deg)'
+    },
+    '100%': {
+        transform: 'perspective(1000px) rotate3d(1, 1, 1, 360deg);'
+    }
+};
+
+var keyframes2 = {
+    '0%': {
+        transform: 'perspective(1000px) rotate3d(-1, -1, -1, 0deg)'
+    },
+    '100%': {
+        transform: 'perspective(1000px) rotate3d(-1, -1, -1, 360deg);'
+    }
+};
+
+
+var animationName = insertKeyframesRule(keyframes);
+var animationName2 = insertKeyframesRule(keyframes2);
+
+var Loader = React.createClass({displayName: "Loader",
+    propTypes: {
+        color: React.PropTypes.string,
+        size: React.PropTypes.string,
+        margin: React.PropTypes.string
+    },
+    getDefaultProps: function(){
+        return {
+            color: '#ffffff',
+            size: '60px'
+        };
+    },
+    getCircleStyle: function (size) {
+        return {
+            width: size,
+            height: size,
+            border: size/10 +'px solid ' + this.props.color,
+            opacity: 0.4,
+            borderRadius: '100%'
+        }
+    },
+    getAnimationStyle: function (i) {
+
+        var animation = [i==1?animationName: animationName2, '2s', '0s', 'infinite', 'linear'].join(' ');
+        var animationFillMode = 'forwards';
+        return {
+            animation: animation,
+            WebkitAnimation: animation,
+            animationFillMode: animationFillMode,
+            WebkitAnimationFillMode: animationFillMode
+        }
+    },
+    getStyle: function (i) {
+        var size = parseInt(this.props.size);
+        if(i) {
+            return assign(
+                this.getCircleStyle(size),
+                this.getAnimationStyle(i),
+                {
+                    position: 'absolute',
+                    top: 0,
+                    left: 0
+                }
+            )
+        }else{
+            return {
+                width: size,
+                height: size,
+                position: 'relative'
+            }
+
+        }
+
+    },
+    render: function () {
+
+        return (
+            React.createElement("div", {style: this.getStyle(0)}, 
+                React.createElement("div", {style: this.getStyle(1)}), 
+                React.createElement("div", {style: this.getStyle(2)})
+            ));
+    }
+});
+
+module.exports = Loader;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":16,"./insertKeyframesRule":17}],14:[function(require,module,exports){
 (function (global){
 
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
@@ -1001,7 +1188,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],13:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],15:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -1017,7 +1204,7 @@ var keyframes = {
     '75%': {
         transform: 'perspective(100px) rotateX(0) rotateY(180deg)'
     },
-    '75%': {
+    '100%': {
         transform: 'perspective(100px) rotateX(0) rotateY(0)'
     }
 };
@@ -1075,7 +1262,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":14,"./insertKeyframesRule":15}],14:[function(require,module,exports){
+},{"./assign":16,"./insertKeyframesRule":17}],16:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1123,7 +1310,7 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var insertRule = require('./insertRule');
 
 var vendorPrefix = '-webkit-';
@@ -1152,7 +1339,7 @@ function insertKeyframesRule(keyframes) {
 }
 
 module.exports = insertKeyframesRule;
-},{"./insertRule":16}],16:[function(require,module,exports){
+},{"./insertRule":18}],18:[function(require,module,exports){
 'use strict';
 
 var extraSheet;

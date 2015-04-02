@@ -48,8 +48,10 @@ var Example = React.createClass({
 * BallPulseSyncLoader
 * BallGridPulseLoader
 * BallClipRotateLoader
+* LineFadeLoader
+* LineScaleLoader
 * SquareLoader
 * PacmanLoader
 * TriangleSkewLoader
-* LineFadeLoader
-* LineScaleLoader
+* RingLoader
+* MoonLoader
