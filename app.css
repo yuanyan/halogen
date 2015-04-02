@@ -149,3 +149,6 @@ footer a:hover,
 footer a:focus {
   color: #fff;
 }
+.CodeMirror {
+  height: 800px;
+}
