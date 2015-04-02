@@ -1,7 +1,7 @@
 Halogen
 =======
 
-Delightful and performance-focused pure css loading animations. Inspired by [loaders.css](http://connoratherton.com/loaders)
+Delightful and performance-focused loading animations. Inspired by [loaders.css](http://connoratherton.com/loaders)
 
 ## Demo & Examples
 
@@ -33,8 +33,23 @@ var Loader = require('halogen/BallPulseLoader');
 var Example = React.createClass({
     render: function() {
         return (
-            <Loader color="#26A65B"/>
+            <Loader color="#26A65B" size="16px" margin="4px"/>
         );
     }
 });
 ```
+
+## Loaders
+
+* BallPulseLoader
+* BallRotateLoader
+* BallBeatLoader
+* BallPulseRiseLoader
+* BallPulseSyncLoader
+* BallGridPulseLoader
+* BallClipRotateLoader
+* SquareLoader
+* PacmanLoader
+* TriangleSkewLoader
+* LineFadeLoader
+* LineScaleLoader
