@@ -1,7 +1,7 @@
 {
   "name": "halogen",
   "version": "0.1.0",
-  "description": "Delightful and performance-focused pure css loading animations.",
+  "description": "A collection of loading spinners with React.js",
   "main": "src/Halogen.js",
   "author": "Yuanyan Cao",
   "license": "MIT",
