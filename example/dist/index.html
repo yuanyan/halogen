@@ -13,6 +13,10 @@ var React = require('react');
 var Halogen = require('halogen');
 var Example = React.createClass({
     render: function() {
+
+        // try change me to a custom color like "red" or "#000000"
+        var color = '#4DAF7C';
+
         var style = {
             display: '-webkit-flex',
             display: 'flex',
@@ -33,8 +37,6 @@ var Example = React.createClass({
             webkitJustifyContent: 'center',
             justifyContent: 'center'
         };
-
-        var color = '#4DAF7C';
 
         return (
             <div style={{
@@ -69,7 +71,8 @@ var Example = React.createClass({
     }
 });
 return <Example/>
-    </script>
+
+</script>
 
 
 <header class="row">
@@ -87,6 +90,7 @@ return <Example/>
         </div>
     </div>
 
+
     <div class="row">
         <div class="example" id="example1">loading...</div>
     </div>
@@ -101,7 +105,10 @@ return <Example/>
     </div>
 </footer>
 
-<a href="https://github.com/yuanyan/halogen"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+<a href="https://github.com/yuanyan/halogen"><img style="position: absolute; top: 0; right: 0; border: 0;"
+                                                  src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67"
+                                                  alt="Fork me on GitHub"
+                                                  data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 <script src="codemirror.js"></script>
 <script src="javascript.js"></script>
