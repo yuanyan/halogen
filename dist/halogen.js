@@ -1,22 +1,24 @@
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Halogen=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = {
-    BallPulseLoader: require('./BallPulseLoader'),
-    BallRotateLoader: require('./BallRotateLoader'),
-    BallBeatLoader: require('./BallBeatLoader'),
-    BallPulseRiseLoader: require('./BallPulseRiseLoader'),
-    BallPulseSyncLoader: require('./BallPulseSyncLoader'),
-    BallGridPulseLoader: require('./BallGridPulseLoader'),
-    BallClipRotateLoader: require('./BallClipRotateLoader'),
+    PulseLoader: require('./PulseLoader'),
+    RotateLoader: require('./RotateLoader'),
+    BeatLoader: require('./BeatLoader'),
+    RiseLoader: require('./RiseLoader'),
+    SyncLoader: require('./SyncLoader'),
+    GridLoader: require('./GridLoader'),
+    ClipLoader: require('./ClipLoader'),
     SquareLoader: require('./SquareLoader'),
+    DotLoader: require('./DotLoader'),
     PacmanLoader: require('./PacmanLoader'),
     MoonLoader: require('./MoonLoader'),
     RingLoader: require('./RingLoader'),
-    TriangleSkewLoader: require('./TriangleSkewLoader'),
-    LineFadeLoader: require('./LineFadeLoader'),
-    LineScaleLoader: require('./LineScaleLoader')
+    BounceLoader: require('./BounceLoader'),
+    SkewLoader: require('./SkewLoader'),
+    FadeLoader: require('./FadeLoader'),
+    ScaleLoader: require('./ScaleLoader')
 };
 
-},{"./BallBeatLoader":2,"./BallClipRotateLoader":3,"./BallGridPulseLoader":4,"./BallPulseLoader":5,"./BallPulseRiseLoader":6,"./BallPulseSyncLoader":7,"./BallRotateLoader":8,"./LineFadeLoader":9,"./LineScaleLoader":10,"./MoonLoader":11,"./PacmanLoader":12,"./RingLoader":13,"./SquareLoader":14,"./TriangleSkewLoader":15}],2:[function(require,module,exports){
+},{"./BeatLoader":2,"./BounceLoader":3,"./ClipLoader":4,"./DotLoader":5,"./FadeLoader":6,"./GridLoader":7,"./MoonLoader":8,"./PacmanLoader":9,"./PulseLoader":10,"./RingLoader":11,"./RiseLoader":12,"./RotateLoader":13,"./ScaleLoader":14,"./SkewLoader":15,"./SquareLoader":16,"./SyncLoader":17}],2:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -90,7 +92,88 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],3:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],3:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
+var assign = require('./assign');
+var insertKeyframesRule = require('./insertKeyframesRule');
+
+var keyframes = {
+    '0%, 100%': {
+        transform: 'scale(0)'
+    },
+    '50%': {
+        transform: 'scale(1.0)'
+    }
+};
+
+var animationName = insertKeyframesRule(keyframes);
+
+var Loader = React.createClass({displayName: "Loader",
+    propTypes: {
+        color: React.PropTypes.string,
+        size: React.PropTypes.string
+    },
+    getDefaultProps: function(){
+        return {
+            color: '#ffffff',
+            size: '60px'
+        };
+    },
+    getBallStyle: function () {
+        return {
+            backgroundColor: this.props.color,
+            width: this.props.size,
+            height: this.props.size,
+            borderRadius: '100%',
+            opacity: 0.6,
+            position: 'absolute',
+            top: 0,
+            left: 0
+        }
+    },
+    getAnimationStyle: function (i) {
+
+        var animation = [animationName, '2s', i==1? '1s': '0s', 'infinite', 'ease-in-out'].join(' ');
+        var animationFillMode = 'both';
+        return {
+            animation: animation,
+            WebkitAnimation: animation,
+            animationFillMode: animationFillMode,
+            WebkitAnimationFillMode: animationFillMode
+        }
+    },
+    getStyle: function (i) {
+
+        if(i){
+            return assign(
+                this.getBallStyle(i),
+                this.getAnimationStyle(i)
+            )
+        }
+
+        return assign(
+            {
+                width: this.props.size,
+                height: this.props.size,
+                position: 'relative'
+            }
+        )
+    },
+    render: function () {
+
+        return (
+            React.createElement("div", {style: this.getStyle()}, 
+                React.createElement("div", {style: this.getStyle(1)}), 
+                React.createElement("div", {style: this.getStyle(2)})
+            ));
+    }
+});
+
+module.exports = Loader;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":18,"./insertKeyframesRule":19}],4:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -161,380 +244,31 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],4:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],5:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
-var keyframes = {
-    '0%': {
-        transform: 'scale(1)'
-    },
-    '50%': {
-        transform: 'scale(0.5)',
-        opacity: 0.7
-    },
-    '100%': {
-        transform: 'scale(1)',
-        opacity: 1
-    }
-};
-
-var animationName = insertKeyframesRule(keyframes);
-
-function random(top){
-    return Math.random() * top
-}
-
-var Loader = React.createClass({displayName: "Loader",
-    propTypes: {
-        color: React.PropTypes.string,
-        size: React.PropTypes.string,
-        margin: React.PropTypes.string
-    },
-    getDefaultProps: function(){
-        return {
-            color: '#ffffff',
-            size: '15px',
-            margin: '2px'
-        };
-    },
-    getBallStyle: function () {
-        return {
-            backgroundColor: this.props.color,
-            width: this.props.size,
-            height: this.props.size,
-            margin: this.props.margin,
-            borderRadius: '100%'
-        }
-    },
-    getAnimationStyle: function (i) {
-
-        var animationDuration = ((random(100) / 100) + 0.6) + 's';
-        var animationDelay = ((random(100) / 100) - 0.2) + 's';
-
-        var animation = [animationName, animationDuration, animationDelay, 'infinite', 'ease'].join(' ');
-        var animationFillMode = 'both';
-        return {
-            animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
-        }
-    },
-    getStyle: function (i) {
-
-        return assign(
-            this.getBallStyle(i),
-            this.getAnimationStyle(i),
-            {
-                display: 'inline-block'
-            }
-        )
-    },
-    render: function () {
-        var style = {
-            width: (parseFloat(this.props.size) * 3) + parseFloat(this.props.margin) * 6,
-            fontSize: 0
-        };
-        return (React.createElement("div", {style: style}, 
-            React.createElement("div", {style: this.getStyle(1)}), 
-            React.createElement("div", {style: this.getStyle(2)}), 
-            React.createElement("div", {style: this.getStyle(3)}), 
-            React.createElement("div", {style: this.getStyle(4)}), 
-            React.createElement("div", {style: this.getStyle(5)}), 
-            React.createElement("div", {style: this.getStyle(6)}), 
-            React.createElement("div", {style: this.getStyle(7)}), 
-            React.createElement("div", {style: this.getStyle(8)}), 
-            React.createElement("div", {style: this.getStyle(9)})
-        ));
-    }
-});
-
-module.exports = Loader;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],5:[function(require,module,exports){
-(function (global){
-var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
-
-var keyframes = {
-    '0%': {
-        transform: 'scale(1)',
-        opacity: 1
-    },
-    '45%': {
-        transform: 'scale(0.1)',
-        opacity: 0.7
-    },
-    '80%': {
-        transform: 'scale(1)',
-        opacity: 1
-    }
-};
-
-var animationName = insertKeyframesRule(keyframes);
-
-var Loader = React.createClass({displayName: "Loader",
-    propTypes: {
-        color: React.PropTypes.string,
-        size: React.PropTypes.string,
-        margin: React.PropTypes.string
-    },
-    getDefaultProps: function(){
-        return {
-            color: '#ffffff',
-            size: '15px',
-            margin: '2px'
-        };
-    },
-    getBallStyle: function () {
-        return {
-            backgroundColor: this.props.color,
-            width: this.props.size,
-            height: this.props.size,
-            margin: this.props.margin,
-            borderRadius: '100%'
-        }
-    },
-    getAnimationStyle: function (i) {
-        var animation = [animationName, '0.75s', (i * 0.12) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
-        var animationFillMode = 'both';
-        return {
-            animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
-        }
-    },
-    getStyle: function (i) {
-
-        return assign(
-            this.getBallStyle(i),
-            this.getAnimationStyle(i),
-            {
-                display: 'inline-block'
-            }
-        )
-    },
-    render: function () {
-
-        return (React.createElement("div", null, 
-            React.createElement("div", {style: this.getStyle(1)}), 
-            React.createElement("div", {style: this.getStyle(2)}), 
-            React.createElement("div", {style: this.getStyle(3)})
-        ));
-    }
-});
-
-module.exports = Loader;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],6:[function(require,module,exports){
-(function (global){
-var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
-
-var riseAmount = 30;
-var keyframesEven = {
-    '0%': {
-        transform: 'scale(1.1)'
-    },
-    '25': {
-        transform: 'translateY(-' + riseAmount + 'px)'
-    },
-    '50%': {
-        transform: 'scale(0.4)'
-    },
-    '75%': {
-        transform: 'translateY(' + riseAmount + 'px)'
-    },
-    '100%': {
-        transform: 'translateY(0) scale(1.0)'
-    }
-};
-
-var keyframesOdd = {
-    '0%': {
-        transform: 'scale(0.4)'
-    },
-    '25': {
-        transform: 'translateY(' + riseAmount + 'px)'
-    },
-    '50%': {
-        transform: 'scale(1.1)'
-    },
-    '75%': {
-        transform: 'translateY(-' + riseAmount + 'px)'
-    },
-    '100%': {
-        transform: 'translateY(0) scale(0.75)'
-    }
-};
-
-
-var animationNameEven = insertKeyframesRule(keyframesEven);
-var animationNameOdd = insertKeyframesRule(keyframesOdd);
-
-var Loader = React.createClass({displayName: "Loader",
-    propTypes: {
-        color: React.PropTypes.string,
-        size: React.PropTypes.string,
-        margin: React.PropTypes.string
-    },
-    getDefaultProps: function(){
-        return {
-            color: '#ffffff',
-            size: '15px',
-            margin: '2px'
-        };
-    },
-    getBallStyle: function () {
-        return {
-            backgroundColor: this.props.color,
-            width: this.props.size,
-            height: this.props.size,
-            margin: this.props.margin,
-            borderRadius: '100%'
-        }
-    },
-    getAnimationStyle: function (i) {
-
-
-        var animation = [i%2==0? animationNameEven: animationNameOdd, '1s', '0s', 'infinite', 'cubic-bezier(.15,.46,.9,.6)'].join(' ');
-        var animationFillMode = 'both';
-        return {
-            animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
-        }
-    },
-    getStyle: function (i) {
-
-        return assign(
-            this.getBallStyle(i),
-            this.getAnimationStyle(i),
-            {
-                display: 'inline-block'
-            }
-        )
-    },
-    render: function () {
-
-        return (React.createElement("div", null, 
-            React.createElement("div", {style: this.getStyle(1)}), 
-            React.createElement("div", {style: this.getStyle(2)}), 
-            React.createElement("div", {style: this.getStyle(3)}), 
-            React.createElement("div", {style: this.getStyle(4)}), 
-            React.createElement("div", {style: this.getStyle(5)})
-        ));
-    }
-});
-
-module.exports = Loader;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],7:[function(require,module,exports){
-(function (global){
-var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
-
-var keyframes = {
-    '33%': {
-        transform: 'translateY(10px)'
-    },
-    '66%': {
-        transform: 'translateY(-10px)'
-    },
-    '100%': {
-        transform: 'translateY(0)'
-    }
-};
-
-
-var animationName = insertKeyframesRule(keyframes);
-
-var Loader = React.createClass({displayName: "Loader",
-    propTypes: {
-        color: React.PropTypes.string,
-        size: React.PropTypes.string,
-        margin: React.PropTypes.string
-    },
-    getDefaultProps: function(){
-        return {
-            color: '#ffffff',
-            size: '15px',
-            margin: '2px'
-        };
-    },
-    getBallStyle: function () {
-        return {
-            backgroundColor: this.props.color,
-            width: this.props.size,
-            height: this.props.size,
-            margin: this.props.margin,
-            borderRadius: '100%'
-        }
-    },
-    getAnimationStyle: function (i) {
-        var animation = [animationName, '0.6s', (i * 0.07) + 's', 'infinite', 'ease-in-out'].join(' ');
-        var animationFillMode = 'both';
-        return {
-            animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
-        }
-    },
-    getStyle: function (i) {
-
-        return assign(
-            this.getBallStyle(i),
-            this.getAnimationStyle(i),
-            {
-                display: 'inline-block'
-            }
-        )
-    },
-    render: function () {
-
-        return (React.createElement("div", null, 
-            React.createElement("div", {style: this.getStyle(1)}), 
-            React.createElement("div", {style: this.getStyle(2)}), 
-            React.createElement("div", {style: this.getStyle(3)})
-        ));
-    }
-});
-
-module.exports = Loader;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],8:[function(require,module,exports){
-(function (global){
-var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
-
-var keyframes = {
-    '0%': {
-        transform: 'rotate(0deg)'
-    },
-    '50%': {
-        transform: 'rotate(180deg)'
-    },
+var rotateKeyframes = {
     '100%': {
         transform: 'rotate(360deg)'
     }
 };
 
 
-var animationName = insertKeyframesRule(keyframes);
+var bounceKeyframes = {
+    '0%, 100%': {
+        transform: 'scale(0)'
+    },
+    '50%': {
+        transform: 'scale(1.0)'
+    }
+};
+
+
+var rotateAnimationName = insertKeyframesRule(rotateKeyframes);
+var bounceAnimationName = insertKeyframesRule(bounceKeyframes);
 
 var Loader = React.createClass({displayName: "Loader",
     propTypes: {
@@ -545,23 +279,21 @@ var Loader = React.createClass({displayName: "Loader",
     getDefaultProps: function(){
         return {
             color: '#ffffff',
-            size: '15px',
-            margin: '2px'
+            size: '60px'
         };
     },
-    getBallStyle: function () {
+    getBallStyle: function (size) {
         return {
             backgroundColor: this.props.color,
-            width: this.props.size,
-            height: this.props.size,
-            margin: this.props.margin,
+            width: size,
+            height: size,
             borderRadius: '100%'
         }
     },
     getAnimationStyle: function (i) {
 
-        var animation = [animationName, '1s', '0s', 'infinite', 'cubic-bezier(.7,-.13,.22,.86)'].join(' ');
-        var animationFillMode = 'both';
+        var animation = [i==0? rotateAnimationName: bounceAnimationName, '2s', i==2? '-1s': '0s', 'infinite', 'linear'].join(' ');
+        var animationFillMode = 'forwards';
         return {
             animation: animation,
             WebkitAnimation: animation,
@@ -570,32 +302,34 @@ var Loader = React.createClass({displayName: "Loader",
         }
     },
     getStyle: function (i) {
-
-        if(i){
+        var size = parseInt(this.props.size);
+        var ballSize = size/2;
+        if(i) {
             return assign(
-                this.getBallStyle(i),
+                this.getBallStyle(ballSize),
+                this.getAnimationStyle(i),
                 {
-                    opacity: '0.8',
                     position: 'absolute',
-                    top: 0,
-                    left: i%2? -28: 25
+                    top: i%2? 0: 'auto',
+                    bottom: i%2? 'auto': 0
+                }
+            )
+        }else{
+            return assign(
+                this.getAnimationStyle(i),
+                {
+                    width: size,
+                    height: size,
+                    position: 'relative'
                 }
             )
         }
 
-        return assign(
-            this.getBallStyle(i),
-            this.getAnimationStyle(i),
-            {
-                display: 'inline-block',
-                position: 'relative'
-            }
-        )
     },
     render: function () {
 
         return (
-            React.createElement("div", {style: this.getStyle()}, 
+            React.createElement("div", {style: this.getStyle(0)}, 
                 React.createElement("div", {style: this.getStyle(1)}), 
                 React.createElement("div", {style: this.getStyle(2)})
             ));
@@ -605,7 +339,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],9:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],6:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -739,7 +473,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],10:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],7:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -747,47 +481,52 @@ var insertKeyframesRule = require('./insertKeyframesRule');
 
 var keyframes = {
     '0%': {
-        transform: 'scaley(1.0)'
+        transform: 'scale(1)'
     },
     '50%': {
-        transform: 'scaley(0.4)'
+        transform: 'scale(0.5)',
+        opacity: 0.7
     },
     '100%': {
-        transform: 'scaley(1.0)'
+        transform: 'scale(1)',
+        opacity: 1
     }
 };
 
 var animationName = insertKeyframesRule(keyframes);
 
+function random(top){
+    return Math.random() * top
+}
+
 var Loader = React.createClass({displayName: "Loader",
     propTypes: {
         color: React.PropTypes.string,
-        height: React.PropTypes.string,
-        width: React.PropTypes.string,
-        margin: React.PropTypes.string,
-        radius: React.PropTypes.string
+        size: React.PropTypes.string,
+        margin: React.PropTypes.string
     },
     getDefaultProps: function(){
         return {
             color: '#ffffff',
-            height: '35px',
-            width: '4px',
-            margin: '2px',
-            radius: '2px'
+            size: '15px',
+            margin: '2px'
         };
     },
-    getLineStyle: function () {
+    getBallStyle: function () {
         return {
             backgroundColor: this.props.color,
-            height: this.props.height,
-            width: this.props.width,
+            width: this.props.size,
+            height: this.props.size,
             margin: this.props.margin,
-            borderRadius: this.props.radius
+            borderRadius: '100%'
         }
     },
     getAnimationStyle: function (i) {
 
-        var animation = [animationName, '1s', (i * 0.1) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
+        var animationDuration = ((random(100) / 100) + 0.6) + 's';
+        var animationDelay = ((random(100) / 100) - 0.2) + 's';
+
+        var animation = [animationName, animationDuration, animationDelay, 'infinite', 'ease'].join(' ');
         var animationFillMode = 'both';
         return {
             animation: animation,
@@ -799,7 +538,7 @@ var Loader = React.createClass({displayName: "Loader",
     getStyle: function (i) {
 
         return assign(
-            this.getLineStyle(i),
+            this.getBallStyle(i),
             this.getAnimationStyle(i),
             {
                 display: 'inline-block'
@@ -807,13 +546,20 @@ var Loader = React.createClass({displayName: "Loader",
         )
     },
     render: function () {
-
-        return (React.createElement("div", null, 
+        var style = {
+            width: (parseFloat(this.props.size) * 3) + parseFloat(this.props.margin) * 6,
+            fontSize: 0
+        };
+        return (React.createElement("div", {style: style}, 
             React.createElement("div", {style: this.getStyle(1)}), 
             React.createElement("div", {style: this.getStyle(2)}), 
             React.createElement("div", {style: this.getStyle(3)}), 
             React.createElement("div", {style: this.getStyle(4)}), 
-            React.createElement("div", {style: this.getStyle(5)})
+            React.createElement("div", {style: this.getStyle(5)}), 
+            React.createElement("div", {style: this.getStyle(6)}), 
+            React.createElement("div", {style: this.getStyle(7)}), 
+            React.createElement("div", {style: this.getStyle(8)}), 
+            React.createElement("div", {style: this.getStyle(9)})
         ));
     }
 });
@@ -821,7 +567,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],11:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],8:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -911,7 +657,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],12:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],9:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -1020,7 +766,7 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],13:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],10:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -1028,25 +774,103 @@ var insertKeyframesRule = require('./insertKeyframesRule');
 
 var keyframes = {
     '0%': {
-        transform: 'perspective(1000px) rotate3d(1, 1, 1, 0deg)'
+        transform: 'scale(1)',
+        opacity: 1
     },
-    '100%': {
-        transform: 'perspective(1000px) rotate3d(1, 1, 1, 360deg);'
+    '45%': {
+        transform: 'scale(0.1)',
+        opacity: 0.7
+    },
+    '80%': {
+        transform: 'scale(1)',
+        opacity: 1
     }
 };
 
-var keyframes2 = {
+var animationName = insertKeyframesRule(keyframes);
+
+var Loader = React.createClass({displayName: "Loader",
+    propTypes: {
+        color: React.PropTypes.string,
+        size: React.PropTypes.string,
+        margin: React.PropTypes.string
+    },
+    getDefaultProps: function(){
+        return {
+            color: '#ffffff',
+            size: '15px',
+            margin: '2px'
+        };
+    },
+    getBallStyle: function () {
+        return {
+            backgroundColor: this.props.color,
+            width: this.props.size,
+            height: this.props.size,
+            margin: this.props.margin,
+            borderRadius: '100%'
+        }
+    },
+    getAnimationStyle: function (i) {
+        var animation = [animationName, '0.75s', (i * 0.12) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
+        var animationFillMode = 'both';
+        return {
+            animation: animation,
+            WebkitAnimation: animation,
+            animationFillMode: animationFillMode,
+            WebkitAnimationFillMode: animationFillMode
+        }
+    },
+    getStyle: function (i) {
+
+        return assign(
+            this.getBallStyle(i),
+            this.getAnimationStyle(i),
+            {
+                display: 'inline-block'
+            }
+        )
+    },
+    render: function () {
+
+        return (React.createElement("div", null, 
+            React.createElement("div", {style: this.getStyle(1)}), 
+            React.createElement("div", {style: this.getStyle(2)}), 
+            React.createElement("div", {style: this.getStyle(3)})
+        ));
+    }
+});
+
+module.exports = Loader;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":18,"./insertKeyframesRule":19}],11:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
+var assign = require('./assign');
+var insertKeyframesRule = require('./insertKeyframesRule');
+
+var rightRotateKeyframes = {
+    '0%': {
+        transform: 'perspective(1000px) rotate3d(1, 1, 1, 0deg)'
+    },
+    '100%': {
+        transform: 'perspective(1000px) rotate3d(1, 1, 1, 360deg)'
+    }
+};
+
+var leftRotateKeyframes = {
     '0%': {
         transform: 'perspective(1000px) rotate3d(-1, -1, -1, 0deg)'
     },
     '100%': {
-        transform: 'perspective(1000px) rotate3d(-1, -1, -1, 360deg);'
+        transform: 'perspective(1000px) rotate3d(-1, -1, -1, 360deg)'
     }
 };
 
 
-var animationName = insertKeyframesRule(keyframes);
-var animationName2 = insertKeyframesRule(keyframes2);
+var rightRotateAnimationName = insertKeyframesRule(rightRotateKeyframes);
+var leftRotateAnimationName = insertKeyframesRule(leftRotateKeyframes);
 
 var Loader = React.createClass({displayName: "Loader",
     propTypes: {
@@ -1071,7 +895,7 @@ var Loader = React.createClass({displayName: "Loader",
     },
     getAnimationStyle: function (i) {
 
-        var animation = [i==1?animationName: animationName2, '2s', '0s', 'infinite', 'linear'].join(' ');
+        var animation = [i==1?rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
         return {
             animation: animation,
@@ -1115,25 +939,127 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],14:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],12:[function(require,module,exports){
 (function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
+var assign = require('./assign');
+var insertKeyframesRule = require('./insertKeyframesRule');
 
+var riseAmount = 30;
+var keyframesEven = {
+    '0%': {
+        transform: 'scale(1.1)'
+    },
+    '25': {
+        transform: 'translateY(-' + riseAmount + 'px)'
+    },
+    '50%': {
+        transform: 'scale(0.4)'
+    },
+    '75%': {
+        transform: 'translateY(' + riseAmount + 'px)'
+    },
+    '100%': {
+        transform: 'translateY(0) scale(1.0)'
+    }
+};
+
+var keyframesOdd = {
+    '0%': {
+        transform: 'scale(0.4)'
+    },
+    '25': {
+        transform: 'translateY(' + riseAmount + 'px)'
+    },
+    '50%': {
+        transform: 'scale(1.1)'
+    },
+    '75%': {
+        transform: 'translateY(-' + riseAmount + 'px)'
+    },
+    '100%': {
+        transform: 'translateY(0) scale(0.75)'
+    }
+};
+
+
+var animationNameEven = insertKeyframesRule(keyframesEven);
+var animationNameOdd = insertKeyframesRule(keyframesOdd);
+
+var Loader = React.createClass({displayName: "Loader",
+    propTypes: {
+        color: React.PropTypes.string,
+        size: React.PropTypes.string,
+        margin: React.PropTypes.string
+    },
+    getDefaultProps: function(){
+        return {
+            color: '#ffffff',
+            size: '15px',
+            margin: '2px'
+        };
+    },
+    getBallStyle: function () {
+        return {
+            backgroundColor: this.props.color,
+            width: this.props.size,
+            height: this.props.size,
+            margin: this.props.margin,
+            borderRadius: '100%'
+        }
+    },
+    getAnimationStyle: function (i) {
+
+
+        var animation = [i%2==0? animationNameEven: animationNameOdd, '1s', '0s', 'infinite', 'cubic-bezier(.15,.46,.9,.6)'].join(' ');
+        var animationFillMode = 'both';
+        return {
+            animation: animation,
+            WebkitAnimation: animation,
+            animationFillMode: animationFillMode,
+            WebkitAnimationFillMode: animationFillMode
+        }
+    },
+    getStyle: function (i) {
+
+        return assign(
+            this.getBallStyle(i),
+            this.getAnimationStyle(i),
+            {
+                display: 'inline-block'
+            }
+        )
+    },
+    render: function () {
+
+        return (React.createElement("div", null, 
+            React.createElement("div", {style: this.getStyle(1)}), 
+            React.createElement("div", {style: this.getStyle(2)}), 
+            React.createElement("div", {style: this.getStyle(3)}), 
+            React.createElement("div", {style: this.getStyle(4)}), 
+            React.createElement("div", {style: this.getStyle(5)})
+        ));
+    }
+});
+
+module.exports = Loader;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":18,"./insertKeyframesRule":19}],13:[function(require,module,exports){
+(function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
 var insertKeyframesRule = require('./insertKeyframesRule');
 
 var keyframes = {
-    '25%': {
-        transform: 'perspective(100px) rotateX(180deg) rotateY(0)'
+    '0%': {
+        transform: 'rotate(0deg)'
     },
     '50%': {
-        transform: 'perspective(100px) rotateX(180deg) rotateY(180deg)'
-    },
-    '75%': {
-        transform: 'perspective(100px) rotateX(0) rotateY(180deg)'
+        transform: 'rotate(180deg)'
     },
     '100%': {
-        transform: 'perspective(100px) rotateX(0) rotateY(0)'
+        transform: 'rotate(360deg)'
     }
 };
 
@@ -1149,18 +1075,115 @@ var Loader = React.createClass({displayName: "Loader",
     getDefaultProps: function(){
         return {
             color: '#ffffff',
-            size: '50px'
+            size: '15px',
+            margin: '2px'
         };
     },
-    getSquareStyle: function () {
+    getBallStyle: function () {
         return {
             backgroundColor: this.props.color,
             width: this.props.size,
-            height: this.props.size
+            height: this.props.size,
+            margin: this.props.margin,
+            borderRadius: '100%'
         }
     },
     getAnimationStyle: function (i) {
-        var animation = [animationName, '3s', '0', 'infinite', 'cubic-bezier(.09,.57,.49,.9)'].join(' ');
+
+        var animation = [animationName, '1s', '0s', 'infinite', 'cubic-bezier(.7,-.13,.22,.86)'].join(' ');
+        var animationFillMode = 'both';
+        return {
+            animation: animation,
+            WebkitAnimation: animation,
+            animationFillMode: animationFillMode,
+            WebkitAnimationFillMode: animationFillMode
+        }
+    },
+    getStyle: function (i) {
+
+        if(i){
+            return assign(
+                this.getBallStyle(i),
+                {
+                    opacity: '0.8',
+                    position: 'absolute',
+                    top: 0,
+                    left: i%2? -28: 25
+                }
+            )
+        }
+
+        return assign(
+            this.getBallStyle(i),
+            this.getAnimationStyle(i),
+            {
+                display: 'inline-block',
+                position: 'relative'
+            }
+        )
+    },
+    render: function () {
+
+        return (
+            React.createElement("div", {style: this.getStyle()}, 
+                React.createElement("div", {style: this.getStyle(1)}), 
+                React.createElement("div", {style: this.getStyle(2)})
+            ));
+    }
+});
+
+module.exports = Loader;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":18,"./insertKeyframesRule":19}],14:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
+var assign = require('./assign');
+var insertKeyframesRule = require('./insertKeyframesRule');
+
+var keyframes = {
+    '0%': {
+        transform: 'scaley(1.0)'
+    },
+    '50%': {
+        transform: 'scaley(0.4)'
+    },
+    '100%': {
+        transform: 'scaley(1.0)'
+    }
+};
+
+var animationName = insertKeyframesRule(keyframes);
+
+var Loader = React.createClass({displayName: "Loader",
+    propTypes: {
+        color: React.PropTypes.string,
+        height: React.PropTypes.string,
+        width: React.PropTypes.string,
+        margin: React.PropTypes.string,
+        radius: React.PropTypes.string
+    },
+    getDefaultProps: function(){
+        return {
+            color: '#ffffff',
+            height: '35px',
+            width: '4px',
+            margin: '2px',
+            radius: '2px'
+        };
+    },
+    getLineStyle: function () {
+        return {
+            backgroundColor: this.props.color,
+            height: this.props.height,
+            width: this.props.width,
+            margin: this.props.margin,
+            borderRadius: this.props.radius
+        }
+    },
+    getAnimationStyle: function (i) {
+
+        var animation = [animationName, '1s', (i * 0.1) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
         var animationFillMode = 'both';
         return {
             animation: animation,
@@ -1172,7 +1195,7 @@ var Loader = React.createClass({displayName: "Loader",
     getStyle: function (i) {
 
         return assign(
-            this.getSquareStyle(i),
+            this.getLineStyle(i),
             this.getAnimationStyle(i),
             {
                 display: 'inline-block'
@@ -1181,14 +1204,20 @@ var Loader = React.createClass({displayName: "Loader",
     },
     render: function () {
 
-        return (React.createElement("div", {style: this.getStyle()}));
+        return (React.createElement("div", null, 
+            React.createElement("div", {style: this.getStyle(1)}), 
+            React.createElement("div", {style: this.getStyle(2)}), 
+            React.createElement("div", {style: this.getStyle(3)}), 
+            React.createElement("div", {style: this.getStyle(4)}), 
+            React.createElement("div", {style: this.getStyle(5)})
+        ));
     }
 });
 
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],15:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],15:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
 var assign = require('./assign');
@@ -1262,7 +1291,156 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":16,"./insertKeyframesRule":17}],16:[function(require,module,exports){
+},{"./assign":18,"./insertKeyframesRule":19}],16:[function(require,module,exports){
+(function (global){
+
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
+var assign = require('./assign');
+var insertKeyframesRule = require('./insertKeyframesRule');
+
+var keyframes = {
+    '25%': {
+        transform: 'perspective(100px) rotateX(180deg) rotateY(0)'
+    },
+    '50%': {
+        transform: 'perspective(100px) rotateX(180deg) rotateY(180deg)'
+    },
+    '75%': {
+        transform: 'perspective(100px) rotateX(0) rotateY(180deg)'
+    },
+    '100%': {
+        transform: 'perspective(100px) rotateX(0) rotateY(0)'
+    }
+};
+
+
+var animationName = insertKeyframesRule(keyframes);
+
+var Loader = React.createClass({displayName: "Loader",
+    propTypes: {
+        color: React.PropTypes.string,
+        size: React.PropTypes.string,
+        margin: React.PropTypes.string
+    },
+    getDefaultProps: function(){
+        return {
+            color: '#ffffff',
+            size: '50px'
+        };
+    },
+    getSquareStyle: function () {
+        return {
+            backgroundColor: this.props.color,
+            width: this.props.size,
+            height: this.props.size
+        }
+    },
+    getAnimationStyle: function (i) {
+        var animation = [animationName, '3s', '0', 'infinite', 'cubic-bezier(.09,.57,.49,.9)'].join(' ');
+        var animationFillMode = 'both';
+        return {
+            animation: animation,
+            WebkitAnimation: animation,
+            animationFillMode: animationFillMode,
+            WebkitAnimationFillMode: animationFillMode
+        }
+    },
+    getStyle: function (i) {
+
+        return assign(
+            this.getSquareStyle(i),
+            this.getAnimationStyle(i),
+            {
+                display: 'inline-block'
+            }
+        )
+    },
+    render: function () {
+
+        return (React.createElement("div", {style: this.getStyle()}));
+    }
+});
+
+module.exports = Loader;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":18,"./insertKeyframesRule":19}],17:[function(require,module,exports){
+(function (global){
+var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
+var assign = require('./assign');
+var insertKeyframesRule = require('./insertKeyframesRule');
+
+var keyframes = {
+    '33%': {
+        transform: 'translateY(10px)'
+    },
+    '66%': {
+        transform: 'translateY(-10px)'
+    },
+    '100%': {
+        transform: 'translateY(0)'
+    }
+};
+
+
+var animationName = insertKeyframesRule(keyframes);
+
+var Loader = React.createClass({displayName: "Loader",
+    propTypes: {
+        color: React.PropTypes.string,
+        size: React.PropTypes.string,
+        margin: React.PropTypes.string
+    },
+    getDefaultProps: function(){
+        return {
+            color: '#ffffff',
+            size: '15px',
+            margin: '2px'
+        };
+    },
+    getBallStyle: function () {
+        return {
+            backgroundColor: this.props.color,
+            width: this.props.size,
+            height: this.props.size,
+            margin: this.props.margin,
+            borderRadius: '100%'
+        }
+    },
+    getAnimationStyle: function (i) {
+        var animation = [animationName, '0.6s', (i * 0.07) + 's', 'infinite', 'ease-in-out'].join(' ');
+        var animationFillMode = 'both';
+        return {
+            animation: animation,
+            WebkitAnimation: animation,
+            animationFillMode: animationFillMode,
+            WebkitAnimationFillMode: animationFillMode
+        }
+    },
+    getStyle: function (i) {
+
+        return assign(
+            this.getBallStyle(i),
+            this.getAnimationStyle(i),
+            {
+                display: 'inline-block'
+            }
+        )
+    },
+    render: function () {
+
+        return (React.createElement("div", null, 
+            React.createElement("div", {style: this.getStyle(1)}), 
+            React.createElement("div", {style: this.getStyle(2)}), 
+            React.createElement("div", {style: this.getStyle(3)})
+        ));
+    }
+});
+
+module.exports = Loader;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"./assign":18,"./insertKeyframesRule":19}],18:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -1310,7 +1488,7 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var insertRule = require('./insertRule');
 
 var vendorPrefix = '-webkit-';
@@ -1339,7 +1517,7 @@ function insertKeyframesRule(keyframes) {
 }
 
 module.exports = insertKeyframesRule;
-},{"./insertRule":18}],18:[function(require,module,exports){
+},{"./insertRule":20}],20:[function(require,module,exports){
 'use strict';
 
 var extraSheet;
