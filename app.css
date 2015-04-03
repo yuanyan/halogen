@@ -50,7 +50,7 @@ h2 {
   padding: 6px 8px;
   font-size: 12px;
   font-weight: bold;
-  color: #666666;
+  color: #039175;
   display: inline-block;
   cursor: pointer;
 }
@@ -151,4 +151,13 @@ footer a:focus {
 }
 .CodeMirror {
   height: 800px;
+}
+.blur {
+  -webkit-animation: blur 1s 3s ease-out infinite;
+}
+@-webkit-keyframes blur {
+  from {
+    transform: scaleX(1.1) scaleY(1.1);
+    opacity: 0.8;
+  }
 }

@@ -165,7 +165,7 @@ var ReactPlayground = React.createClass({displayName: "ReactPlayground",
 
         return (
          React.createElement("div", {className: "playground"}, 
-            React.createElement("div", {className: "playgroundTab", onClick: this.changeTab}, tabText), 
+            React.createElement("div", {className: "playgroundTab", onClick: this.changeTab}, React.createElement("span", {className: "blur"}, tabText)), 
             this.state.tab == 'preview'? code: preview
          )
       );
