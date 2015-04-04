@@ -41,7 +41,7 @@ var Loader = React.createClass({
         }
     },
     getAnimationStyle: function (i) {
-        var animation = [animationName, '3s', '0', 'infinite', 'cubic-bezier(.09,.57,.49,.9)'].join(' ');
+        var animation = [animationName, '3s', '0s', 'infinite', 'cubic-bezier(.09,.57,.49,.9)'].join(' ');
         var animationFillMode = 'both';
         return {
             animation: animation,

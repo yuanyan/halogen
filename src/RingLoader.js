@@ -4,19 +4,20 @@ var insertKeyframesRule = require('./insertKeyframesRule');
 
 var rightRotateKeyframes = {
     '0%': {
-        transform: 'perspective(1000px) rotate3d(1, 1, 1, 0deg)'
+        transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
+
     },
     '100%': {
-        transform: 'perspective(1000px) rotate3d(1, 1, 1, 360deg)'
+        transform: 'rotateX(180deg) rotateY(360deg) rotateZ(360deg)'
     }
 };
 
 var leftRotateKeyframes = {
     '0%': {
-        transform: 'perspective(1000px) rotate3d(-1, -1, -1, 0deg)'
+        transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
     },
     '100%': {
-        transform: 'perspective(1000px) rotate3d(-1, -1, -1, 360deg)'
+        transform: 'rotateX(360deg) rotateY(180deg) rotateZ(360deg)'
     }
 };
 
@@ -47,12 +48,22 @@ var Loader = React.createClass({
     },
     getAnimationStyle: function (i) {
 
-        var animation = [i==1?rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
+        var animation = [i==1? rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
+
         var animationFillMode = 'forwards';
+        var perspective = '800px';
+
         return {
+            perspective: perspective,
+            MozPerspective: perspective,
+            WebkitPerspective: perspective,
+
             animation: animation,
             WebkitAnimation: animation,
+            MozAnimation: animation,
+
             animationFillMode: animationFillMode,
+            MozAnimationFillMode: animationFillMode,
             WebkitAnimationFillMode: animationFillMode
         }
     },

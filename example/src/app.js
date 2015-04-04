@@ -54,6 +54,7 @@ var ComponentPreview = React.createClass({
             var compiledCode = this.compileCode();
             React.render(eval(compiledCode), mountNode);
         } catch (err) {
+            debugger
             this.setTimeout(function() {
                 React.render(
                     <div className="playgroundError">{err.toString()}</div>,

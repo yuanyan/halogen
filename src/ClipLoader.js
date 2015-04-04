@@ -39,7 +39,7 @@ var Loader = React.createClass({
         }
     },
     getAnimationStyle: function (i) {
-        var animation = [animationName, '0.75s', '0', 'infinite', 'linear'].join(' ');
+        var animation = [animationName, '0.75s', '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'both';
 
         return {
