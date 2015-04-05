@@ -1,15 +1,5 @@
 var insertRule = require('./insertRule');
-
-var vendorPrefix = (function () {
-  var styles = window.getComputedStyle(document.documentElement, ''),
-    pre = (Array.prototype.slice
-      .call(styles)
-      .join('')
-      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-      )[1];
-  return '-' + pre + '-';
-})();
-
+var vendorPrefix = require('./vendorPrefix').getVendorPrefix();
 var index = 0;
 
 function insertKeyframesRule(keyframes) {
@@ -21,7 +11,10 @@ function insertKeyframesRule(keyframes) {
         css += key + " {";
 
         for (var property in keyframes[key]) {
-            css += property + ":" + keyframes[key][property] + ";";
+            var part = ":" + keyframes[key][property] + ";";
+            // We do vendor prefix for every property
+            css += vendorPrefix + property + part;
+            css += property + part;
         }
 
         css += "}";

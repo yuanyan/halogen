@@ -44,9 +44,7 @@ var Loader = React.createClass({
 
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {

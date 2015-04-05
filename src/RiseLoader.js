@@ -67,14 +67,12 @@ var Loader = React.createClass({
     },
     getAnimationStyle: function (i) {
 
-
         var animation = [i%2==0? animationNameEven: animationNameOdd, '1s', '0s', 'infinite', 'cubic-bezier(.15,.46,.9,.6)'].join(' ');
         var animationFillMode = 'both';
+        
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {

@@ -49,22 +49,13 @@ var Loader = React.createClass({
     getAnimationStyle: function (i) {
 
         var animation = [i==1? rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
-
         var animationFillMode = 'forwards';
         var perspective = '800px';
 
         return {
             perspective: perspective,
-            MozPerspective: perspective,
-            WebkitPerspective: perspective,
-
             animation: animation,
-            WebkitAnimation: animation,
-            MozAnimation: animation,
-
-            animationFillMode: animationFillMode,
-            MozAnimationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {

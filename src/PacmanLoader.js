@@ -45,11 +45,10 @@ var Loader = React.createClass({
 
         var animation = [animationName, '1s', i*0.25 + 's', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'both';
+        
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {

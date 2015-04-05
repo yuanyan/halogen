@@ -12,6 +12,7 @@
 // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
 
 'use strict';
+var prefix = require('./vendorPrefix').prefix;
 
 function assign(target, sources) {
     if (target == null) {
@@ -41,7 +42,7 @@ function assign(target, sources) {
         }
     }
 
-    return to;
+    return prefix(to);
 }
 
 module.exports = assign;

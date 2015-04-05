@@ -8,7 +8,6 @@ var rotateKeyframes = {
     }
 };
 
-
 var bounceKeyframes = {
     '0%, 100%': {
         transform: 'scale(0)'
@@ -17,7 +16,6 @@ var bounceKeyframes = {
         transform: 'scale(1.0)'
     }
 };
-
 
 var rotateAnimationName = insertKeyframesRule(rotateKeyframes);
 var bounceAnimationName = insertKeyframesRule(bounceKeyframes);
@@ -46,11 +44,10 @@ var Loader = React.createClass({
 
         var animation = [i==0? rotateAnimationName: bounceAnimationName, '2s', i==2? '-1s': '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
