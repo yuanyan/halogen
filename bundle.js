@@ -41,11 +41,10 @@ var Loader = React.createClass({displayName: "Loader",
     getAnimationStyle: function (i) {
         var animation = [animationName, '0.7s', i%2? '0s': '0.35s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'both';
+        
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -115,9 +114,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -196,9 +193,7 @@ var Loader = React.createClass({displayName: "Loader",
 
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -229,7 +224,6 @@ var rotateKeyframes = {
     }
 };
 
-
 var bounceKeyframes = {
     '0%, 100%': {
         transform: 'scale(0)'
@@ -238,7 +232,6 @@ var bounceKeyframes = {
         transform: 'scale(1.0)'
     }
 };
-
 
 var rotateAnimationName = insertKeyframesRule(rotateKeyframes);
 var bounceAnimationName = insertKeyframesRule(bounceKeyframes);
@@ -267,11 +260,10 @@ var Loader = React.createClass({displayName: "Loader",
 
         var animation = [i==0? rotateAnimationName: bounceAnimationName, '2s', i==2? '-1s': '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -359,9 +351,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getPosStyle: function(i){
@@ -497,11 +487,10 @@ var Loader = React.createClass({displayName: "Loader",
 
         var animation = [animationName, animationDuration, animationDelay, 'infinite', 'ease'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -572,11 +561,10 @@ var Loader = React.createClass({displayName: "Loader",
 
         var animation = [animationName, '0.6s', '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
+        
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -671,11 +659,10 @@ var Loader = React.createClass({displayName: "Loader",
 
         var animation = [animationName, '1s', i*0.25 + 's', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'both';
+        
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -777,11 +764,10 @@ var Loader = React.createClass({displayName: "Loader",
     getAnimationStyle: function (i) {
         var animation = [animationName, '0.75s', (i * 0.12) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -858,22 +844,13 @@ var Loader = React.createClass({displayName: "Loader",
     getAnimationStyle: function (i) {
 
         var animation = [i==1? rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
-
         var animationFillMode = 'forwards';
         var perspective = '800px';
 
         return {
             perspective: perspective,
-            MozPerspective: perspective,
-            WebkitPerspective: perspective,
-
             animation: animation,
-            WebkitAnimation: animation,
-            MozAnimation: animation,
-
-            animationFillMode: animationFillMode,
-            MozAnimationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -980,14 +957,12 @@ var Loader = React.createClass({displayName: "Loader",
     },
     getAnimationStyle: function (i) {
 
-
         var animation = [i%2==0? animationNameEven: animationNameOdd, '1s', '0s', 'infinite', 'cubic-bezier(.15,.46,.9,.6)'].join(' ');
         var animationFillMode = 'both';
+        
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1062,9 +1037,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
             animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1153,9 +1126,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1229,9 +1200,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1262,16 +1231,16 @@ var insertKeyframesRule = require('./insertKeyframesRule');
 
 var keyframes = {
     '25%': {
-        transform: 'perspective(100px) rotateX(180deg) rotateY(0)'
+        transform: 'rotateX(180deg) rotateY(0)'
     },
     '50%': {
-        transform: 'perspective(100px) rotateX(180deg) rotateY(180deg)'
+        transform: 'rotateX(180deg) rotateY(180deg)'
     },
     '75%': {
-        transform: 'perspective(100px) rotateX(0) rotateY(180deg)'
+        transform: 'rotateX(0) rotateY(180deg)'
     },
     '100%': {
-        transform: 'perspective(100px) rotateX(0) rotateY(0)'
+        transform: 'rotateX(0) rotateY(0)'
     }
 };
 
@@ -1300,11 +1269,12 @@ var Loader = React.createClass({displayName: "Loader",
     getAnimationStyle: function (i) {
         var animation = [animationName, '3s', '0s', 'infinite', 'cubic-bezier(.09,.57,.49,.9)'].join(' ');
         var animationFillMode = 'both';
+        var perspective = '100px';
+
         return {
+            perspective: perspective,
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1372,9 +1342,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1414,6 +1382,7 @@ module.exports = Loader;
 // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
 
 'use strict';
+var prefix = require('./vendorPrefix').prefix;
 
 function assign(target, sources) {
     if (target == null) {
@@ -1443,23 +1412,14 @@ function assign(target, sources) {
         }
     }
 
-    return to;
+    return prefix(to);
 }
 
 module.exports = assign;
-},{}],18:[function(require,module,exports){
+
+},{"./vendorPrefix":20}],18:[function(require,module,exports){
 var insertRule = require('./insertRule');
-
-var vendorPrefix = (function () {
-  var styles = window.getComputedStyle(document.documentElement, ''),
-    pre = (Array.prototype.slice
-      .call(styles)
-      .join('')
-      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-      )[1];
-  return '-' + pre + '-';
-})();
-
+var vendorPrefix = require('./vendorPrefix').getVendorPrefix();
 var index = 0;
 
 function insertKeyframesRule(keyframes) {
@@ -1471,7 +1431,10 @@ function insertKeyframesRule(keyframes) {
         css += key + " {";
 
         for (var property in keyframes[key]) {
-            css += property + ":" + keyframes[key][property] + ";";
+            var part = ":" + keyframes[key][property] + ";";
+            // We do vendor prefix for every property
+            css += vendorPrefix + property + part;
+            css += property + part;
         }
 
         css += "}";
@@ -1486,7 +1449,7 @@ function insertKeyframesRule(keyframes) {
 
 module.exports = insertKeyframesRule;
 
-},{"./insertRule":19}],19:[function(require,module,exports){
+},{"./insertRule":19,"./vendorPrefix":20}],19:[function(require,module,exports){
 'use strict';
 
 var extraSheet;
@@ -1506,6 +1469,57 @@ function insertRule(css) {
 }
 
 module.exports = insertRule;
+
+},{}],20:[function(require,module,exports){
+var div = document.createElement('div');
+var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
+var cssVendorPrefix;
+var domVendorPrefix;
+
+// Helper function to get the proper vendor property name. (transition => WebkitTransition)
+function getVendorPropertyName(prop) {
+
+   if (prop in div.style) return prop;
+
+   var prop = prop.charAt(0).toUpperCase() + prop.substr(1);
+   if(domVendorPrefix){
+       return domVendorPrefix + prop;
+   }else{
+       for (var i=0; i<prefixes.length; ++i) {
+           var vendorProp = prefixes[i] + prop;
+           if (vendorProp in div.style) {
+               domVendorPrefix = prefixes[i];
+               return vendorProp;
+           }
+       }
+   }
+
+}
+
+function getVendorPrefix(){
+
+    if(cssVendorPrefix) return cssVendorPrefix;
+
+    var styles = window.getComputedStyle(document.documentElement, '');
+    var pre = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    )[1];
+
+    return cssVendorPrefix = '-' + pre + '-';
+}
+
+function prefix(style){
+    var prefixed = {};
+    for (var key in style) {
+        prefixed[getVendorPropertyName(key)] = style[key]
+    }
+    return prefixed
+}
+
+module.exports = {
+    getVendorPropertyName: getVendorPropertyName,
+    getVendorPrefix: getVendorPrefix,
+    prefix: prefix
+};
 
 },{}],"halogen":[function(require,module,exports){
 module.exports = {
