@@ -18,11 +18,137 @@ module.exports = {
     ScaleLoader: require('./ScaleLoader')
 };
 
-},{"./BeatLoader":2,"./BounceLoader":3,"./ClipLoader":4,"./DotLoader":5,"./FadeLoader":6,"./GridLoader":7,"./MoonLoader":8,"./PacmanLoader":9,"./PulseLoader":10,"./RingLoader":11,"./RiseLoader":12,"./RotateLoader":13,"./ScaleLoader":14,"./SkewLoader":15,"./SquareLoader":16,"./SyncLoader":17}],2:[function(require,module,exports){
+},{"./BeatLoader":7,"./BounceLoader":8,"./ClipLoader":9,"./DotLoader":10,"./FadeLoader":11,"./GridLoader":12,"./MoonLoader":13,"./PacmanLoader":14,"./PulseLoader":15,"./RingLoader":16,"./RiseLoader":17,"./RotateLoader":18,"./ScaleLoader":19,"./SkewLoader":20,"./SquareLoader":21,"./SyncLoader":22}],2:[function(require,module,exports){
+'use strict';
+var getVendorPropertyName = require('./getVendorPropertyName');
+
+module.exports = function (target, sources){
+    var to = Object(target);
+    var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+    for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
+        var nextSource = arguments[nextIndex];
+        if (nextSource == null) {
+            continue;
+        }
+
+        var from = Object(nextSource);
+
+        for (var key in from) {
+            if (hasOwnProperty.call(from, key)) {
+                to[key] = from[key];
+            }
+        }
+    }
+
+    var prefixed = {};
+    for (var key in to) {
+        prefixed[getVendorPropertyName(key)] = to[key]
+    }
+
+    return prefixed
+}
+
+},{"./getVendorPropertyName":4}],3:[function(require,module,exports){
+'use strict';
+
+var cssVendorPrefix;
+
+module.exports = function (){
+
+    if(cssVendorPrefix) return cssVendorPrefix;
+
+    var styles = window.getComputedStyle(document.documentElement, '');
+    var pre = (Array.prototype.slice.call(styles).join('').match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+    )[1];
+
+    return cssVendorPrefix = '-' + pre + '-';
+}
+
+},{}],4:[function(require,module,exports){
+'use strict';
+
+var div = document.createElement('div');
+var prefixes = ['Moz', 'Webkit', 'O', 'ms'];
+var domVendorPrefix;
+
+// Helper function to get the proper vendor property name. (transition => WebkitTransition)
+module.exports = function (prop) {
+
+   if (prop in div.style) return prop;
+
+   var prop = prop.charAt(0).toUpperCase() + prop.substr(1);
+   if(domVendorPrefix){
+       return domVendorPrefix + prop;
+   }else{
+       for (var i=0; i<prefixes.length; ++i) {
+           var vendorProp = prefixes[i] + prop;
+           if (vendorProp in div.style) {
+               domVendorPrefix = prefixes[i];
+               return vendorProp;
+           }
+       }
+   }
+}
+
+},{}],5:[function(require,module,exports){
+'use strict';
+
+var insertRule = require('./insertRule');
+var vendorPrefix = require('./getVendorPrefix')();
+var index = 0;
+
+module.exports = function (keyframes) {
+    // random name
+    var name = 'anim_'+ (++index) + (+new Date);
+    var css = "@" + vendorPrefix + "keyframes " + name + " {";
+
+    for (var key in keyframes) {
+        css += key + " {";
+
+        for (var property in keyframes[key]) {
+            var part = ":" + keyframes[key][property] + ";";
+            // We do vendor prefix for every property
+            css += vendorPrefix + property + part;
+            css += property + part;
+        }
+
+        css += "}";
+    }
+
+    css += "}";
+
+    insertRule(css);
+
+    return name
+}
+
+},{"./getVendorPrefix":3,"./insertRule":6}],6:[function(require,module,exports){
+'use strict';
+
+var extraSheet;
+
+module.exports = function (css) {
+
+    if (!extraSheet) {
+        // First time, create an extra stylesheet for adding rules
+        extraSheet = document.createElement('style');
+        document.getElementsByTagName('head')[0].appendChild(extraSheet);
+        // Keep reference to actual StyleSheet object (`styleSheet` for IE < 9)
+        extraSheet = extraSheet.sheet || extraSheet.styleSheet;
+    }
+
+    var index = (extraSheet.cssRules || extraSheet.rules).length;
+    extraSheet.insertRule(css, index);
+
+    return extraSheet;
+}
+
+},{}],7:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '50%': {
@@ -62,11 +188,10 @@ var Loader = React.createClass({displayName: "Loader",
     getAnimationStyle: function (i) {
         var animation = [animationName, '0.7s', i%2? '0s': '0.35s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -92,11 +217,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],3:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],8:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '0%, 100%': {
@@ -138,9 +263,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -173,11 +296,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],4:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],9:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '0%': {
@@ -221,9 +344,7 @@ var Loader = React.createClass({displayName: "Loader",
 
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -244,18 +365,17 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],5:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],10:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var rotateKeyframes = {
     '100%': {
         transform: 'rotate(360deg)'
     }
 };
-
 
 var bounceKeyframes = {
     '0%, 100%': {
@@ -265,7 +385,6 @@ var bounceKeyframes = {
         transform: 'scale(1.0)'
     }
 };
-
 
 var rotateAnimationName = insertKeyframesRule(rotateKeyframes);
 var bounceAnimationName = insertKeyframesRule(bounceKeyframes);
@@ -294,11 +413,10 @@ var Loader = React.createClass({displayName: "Loader",
 
         var animation = [i==0? rotateAnimationName: bounceAnimationName, '2s', i==2? '-1s': '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -339,11 +457,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],6:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],11:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '50%': {
@@ -388,9 +506,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getPosStyle: function(i){
@@ -473,11 +589,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],7:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],12:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '0%': {
@@ -528,11 +644,10 @@ var Loader = React.createClass({displayName: "Loader",
 
         var animation = [animationName, animationDuration, animationDelay, 'infinite', 'ease'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -567,11 +682,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],8:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],13:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '100%': {
@@ -605,11 +720,10 @@ var Loader = React.createClass({displayName: "Loader",
 
         var animation = [animationName, '0.6s', '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -657,11 +771,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],9:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],14:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var animations = {};
 
@@ -706,11 +820,10 @@ var Loader = React.createClass({displayName: "Loader",
 
         var animation = [animationName, '1s', i*0.25 + 's', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -766,11 +879,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],10:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],15:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '0%': {
@@ -814,11 +927,10 @@ var Loader = React.createClass({displayName: "Loader",
     getAnimationStyle: function (i) {
         var animation = [animationName, '0.75s', (i * 0.12) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -844,11 +956,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],11:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],16:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var rightRotateKeyframes = {
     '0%': {
@@ -897,22 +1009,13 @@ var Loader = React.createClass({displayName: "Loader",
     getAnimationStyle: function (i) {
 
         var animation = [i==1? rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
-
         var animationFillMode = 'forwards';
         var perspective = '800px';
 
         return {
             perspective: perspective,
-            MozPerspective: perspective,
-            WebkitPerspective: perspective,
-
             animation: animation,
-            WebkitAnimation: animation,
-            MozAnimation: animation,
-
-            animationFillMode: animationFillMode,
-            MozAnimationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -950,11 +1053,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],12:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],17:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var riseAmount = 30;
 var keyframesEven = {
@@ -1021,14 +1124,12 @@ var Loader = React.createClass({displayName: "Loader",
     },
     getAnimationStyle: function (i) {
 
-
         var animation = [i%2==0? animationNameEven: animationNameOdd, '1s', '0s', 'infinite', 'cubic-bezier(.15,.46,.9,.6)'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1056,11 +1157,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],13:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],18:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '0%': {
@@ -1105,9 +1206,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
             animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1146,11 +1245,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],14:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],19:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '0%': {
@@ -1198,9 +1297,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1228,11 +1325,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],15:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],20:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '25%': {
@@ -1276,9 +1373,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1302,25 +1397,24 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],16:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],21:[function(require,module,exports){
 (function (global){
-
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '25%': {
-        transform: 'perspective(100px) rotateX(180deg) rotateY(0)'
+        transform: 'rotateX(180deg) rotateY(0)'
     },
     '50%': {
-        transform: 'perspective(100px) rotateX(180deg) rotateY(180deg)'
+        transform: 'rotateX(180deg) rotateY(180deg)'
     },
     '75%': {
-        transform: 'perspective(100px) rotateX(0) rotateY(180deg)'
+        transform: 'rotateX(0) rotateY(180deg)'
     },
     '100%': {
-        transform: 'perspective(100px) rotateX(0) rotateY(0)'
+        transform: 'rotateX(0) rotateY(0)'
     }
 };
 
@@ -1349,11 +1443,12 @@ var Loader = React.createClass({displayName: "Loader",
     getAnimationStyle: function (i) {
         var animation = [animationName, '3s', '0s', 'infinite', 'cubic-bezier(.09,.57,.49,.9)'].join(' ');
         var animationFillMode = 'both';
+        var perspective = '100px';
+
         return {
+            perspective: perspective,
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1375,11 +1470,11 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],17:[function(require,module,exports){
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}],22:[function(require,module,exports){
 (function (global){
 var React = (typeof window !== "undefined" ? window.React : typeof global !== "undefined" ? global.React : null);
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '33%': {
@@ -1423,9 +1518,7 @@ var Loader = React.createClass({displayName: "Loader",
         var animationFillMode = 'both';
         return {
             animation: animation,
-            WebkitAnimation: animation,
-            animationFillMode: animationFillMode,
-            WebkitAnimationFillMode: animationFillMode
+            animationFillMode: animationFillMode
         }
     },
     getStyle: function (i) {
@@ -1451,113 +1544,5 @@ var Loader = React.createClass({displayName: "Loader",
 module.exports = Loader;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./assign":18,"./insertKeyframesRule":19}],18:[function(require,module,exports){
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule Object.assign
- */
-
-// https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
-
-'use strict';
-
-function assign(target, sources) {
-    if (target == null) {
-        throw new TypeError('Object.assign target cannot be null or undefined');
-    }
-
-    var to = Object(target);
-    var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-    for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
-        var nextSource = arguments[nextIndex];
-        if (nextSource == null) {
-            continue;
-        }
-
-        var from = Object(nextSource);
-
-        // We don't currently support accessors nor proxies. Therefore this
-        // copy cannot throw. If we ever supported this then we must handle
-        // exceptions and side-effects. We don't support symbols so they won't
-        // be transferred.
-
-        for (var key in from) {
-            if (hasOwnProperty.call(from, key)) {
-                to[key] = from[key];
-            }
-        }
-    }
-
-    return to;
-}
-
-module.exports = assign;
-},{}],19:[function(require,module,exports){
-var insertRule = require('./insertRule');
-
-var vendorPrefix = (function () {
-  var styles = window.getComputedStyle(document.documentElement, ''),
-    pre = (Array.prototype.slice
-      .call(styles)
-      .join('')
-      .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-      )[1];
-  return '-' + pre + '-';
-})();
-
-var index = 0;
-
-function insertKeyframesRule(keyframes) {
-    // random name
-    var name = 'anim_'+ (++index) + (+new Date);
-    var css = "@" + vendorPrefix + "keyframes " + name + " {";
-
-    for (var key in keyframes) {
-        css += key + " {";
-
-        for (var property in keyframes[key]) {
-            css += property + ":" + keyframes[key][property] + ";";
-        }
-
-        css += "}";
-    }
-
-    css += "}";
-
-    insertRule(css);
-
-    return name
-}
-
-module.exports = insertKeyframesRule;
-
-},{"./insertRule":20}],20:[function(require,module,exports){
-'use strict';
-
-var extraSheet;
-
-function insertRule(css) {
-
-    if (!extraSheet) {
-        // First time, create an extra stylesheet for adding rules
-        extraSheet = document.createElement('style');
-        document.getElementsByTagName('head')[0].appendChild(extraSheet);
-        // Keep reference to actual StyleSheet object (`styleSheet` for IE < 9)
-        extraSheet = extraSheet.sheet || extraSheet.styleSheet;
-    }
-
-    var index = (extraSheet.cssRules || extraSheet.rules).length;
-    extraSheet.insertRule(css, index);
-}
-
-module.exports = insertRule;
-
-},{}]},{},[1])(1)
+},{"react-kit/appendVendorPrefix":2,"react-kit/insertKeyframesRule":5}]},{},[1])(1)
 });

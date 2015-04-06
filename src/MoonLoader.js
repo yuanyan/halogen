@@ -1,6 +1,6 @@
 var React = require('react');
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var keyframes = {
     '100%': {
@@ -34,7 +34,7 @@ var Loader = React.createClass({
 
         var animation = [animationName, '0.6s', '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
-        
+
         return {
             animation: animation,
             animationFillMode: animationFillMode

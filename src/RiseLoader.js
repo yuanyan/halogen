@@ -1,6 +1,6 @@
 var React = require('react');
-var assign = require('./assign');
-var insertKeyframesRule = require('./insertKeyframesRule');
+var assign = require('react-kit/appendVendorPrefix');
+var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
 var riseAmount = 30;
 var keyframesEven = {
@@ -69,7 +69,7 @@ var Loader = React.createClass({
 
         var animation = [i%2==0? animationNameEven: animationNameOdd, '1s', '0s', 'infinite', 'cubic-bezier(.15,.46,.9,.6)'].join(' ');
         var animationFillMode = 'both';
-        
+
         return {
             animation: animation,
             animationFillMode: animationFillMode
