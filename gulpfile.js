@@ -14,6 +14,7 @@ var browserify = require('browserify'),
 	gutil = require('gulp-util'),
 	merge = require('merge-stream'),
 	reactify = require('reactify'),
+	react = require('gulp-react'),
 	source = require('vinyl-source-stream'),
 	watchify = require('watchify');
 
@@ -92,30 +93,22 @@ gulp.task('prepare:examples', function(done) {
 /**
  * Build example files
  */
-
-function buildExampleFiles() {
+gulp.task('build:example:files', ['prepare:examples'], function buildExampleFiles() {
 	return gulp.src(EXAMPLE_FILES.map(function(i) { return EXAMPLE_SRC_PATH + '/' + i }))
 		.pipe(gulp.dest(EXAMPLE_DIST_PATH))
 		.pipe(connect.reload());
-}
-
-gulp.task('dev:build:example:files', buildExampleFiles);
-gulp.task('build:example:files', ['prepare:examples'], buildExampleFiles);
+});
 
 
 /**
  * Build example css from less
  */
-
-function buildExampleCSS() {
+gulp.task('build:example:css', ['prepare:examples'], function buildExampleCSS() {
 	return gulp.src(EXAMPLE_SRC_PATH + '/' + EXAMPLE_LESS)
 		.pipe(less())
 		.pipe(gulp.dest(EXAMPLE_DIST_PATH))
 		.pipe(connect.reload());
-}
-
-gulp.task('dev:build:example:css', buildExampleCSS);
-gulp.task('build:example:css', ['prepare:examples'], buildExampleCSS);
+});
 
 
 /**
@@ -160,37 +153,34 @@ function buildExampleScripts(dev) {
 
 };
 
-gulp.task('dev:build:example:copy', function(){
+
+gulp.task('dev:build:example:scripts', ['prepare:examples'], buildExampleScripts(true));
+gulp.task('build:example:scripts', ['prepare:examples'], buildExampleScripts());
+
+gulp.task('build:example:copy', function(){
     return gulp.src(EXAMPLE_COPY)
         .pipe(gulp.dest(EXAMPLE_DIST_PATH))
         .pipe(connect.reload());
 });
-gulp.task('build:example:copy', ['dev:build:example:copy']);
-
-
-gulp.task('dev:build:example:scripts', buildExampleScripts(true));
-gulp.task('build:example:scripts', ['prepare:examples'], buildExampleScripts());
-
 
 /**
  * Build examples
  */
-
 gulp.task('build:examples', [
 	'build:example:files',
 	'build:example:css',
 	'build:example:scripts',
-    'build:example:copy'
+  'build:example:copy'
 ]);
 
 gulp.task('watch:examples', [
-	'dev:build:example:files',
-	'dev:build:example:css',
+	'build:example:files',
+	'build:example:css',
 	'dev:build:example:scripts',
-	'dev:build:example:copy'
+	'build:example:copy'
 ], function() {
-	gulp.watch(EXAMPLE_FILES.map(function(i) { return EXAMPLE_SRC_PATH + '/' + i }), ['dev:build:example:files']);
-	gulp.watch([EXAMPLE_SRC_PATH + '/' + EXAMPLE_LESS], ['dev:build:example:css']);
+	gulp.watch(EXAMPLE_FILES.map(function(i) { return EXAMPLE_SRC_PATH + '/' + i }), ['build:example:files']);
+	gulp.watch([EXAMPLE_SRC_PATH + '/' + EXAMPLE_LESS], ['build:example:css']);
 });
 
 
@@ -205,7 +195,6 @@ gulp.task('dev:server', function() {
 		livereload: true
 	});
 });
-
 
 /**
  * Development task
@@ -250,9 +239,11 @@ gulp.task('build:dist', ['prepare:dist'], function() {
 });
 
 gulp.task('build', [
-	'build:dist',
-	'build:examples'
-]);
+	'prepare:dist',
+	'prepare:examples'
+], function(){
+	gulp.start('build:dist', 'build:examples')
+});
 
 
 /**

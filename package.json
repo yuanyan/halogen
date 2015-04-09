@@ -2,7 +2,7 @@
   "name": "halogen",
   "version": "0.1.4",
   "description": "A collection of loading spinners with React.js",
-  "main": "src/Halogen.js",
+  "main": "Halogen.js",
   "author": "Yuanyan Cao",
   "license": "MIT",
   "repository": {
@@ -14,7 +14,7 @@
     "reactify": "^0.17.0"
   },
   "peerDependencies": {
-    "react": "^0.13.1"
+    "react": ">=0.12.0"
   },
   "devDependencies": {
     "browserify": "^6.3.3",
@@ -34,7 +34,8 @@
     "gulp-util": "^3.0.1",
     "merge-stream": "^0.1.6",
     "vinyl-source-stream": "^1.0.0",
-    "watchify": "^2.1.1"
+    "watchify": "^2.1.1",
+    "gulp-react": "^3.0.1"
   },
   "browserify": {
     "transform": [
