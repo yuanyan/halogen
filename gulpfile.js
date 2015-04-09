@@ -2,6 +2,7 @@ var browserify = require('browserify'),
 	shim = require('browserify-shim'),
 	chalk = require('chalk'),
 	del = require('del'),
+	vinyPaths = require('vinyl-paths'),
 	gulp = require('gulp'),
 	bump = require('gulp-bump'),
 	connect = require('gulp-connect'),
@@ -283,15 +284,28 @@ gulp.task('publish:tag', function(done) {
 });
 
 
+
 /**
  * npm publish task
  * * (version *must* be bumped first)
  */
+function buildToRoot(){
+	return gulp.src(SRC_PATH + '/*.js')
+		.pipe(react())
+		.pipe(gulp.dest('./'))
+}
 
-gulp.task('publish:npm', function(done) {
+gulp.task('build:npm', buildToRoot);
+
+gulp.task('publish:npm', ['build:npm'], function(done) {
+
 	require('child_process')
 		.spawn('npm', ['publish'], { stdio: 'inherit' })
 		.on('close', done);
+});
+
+gulp.task('release:npm', ['publish:npm'], function(){
+		buildToRoot().pipe(vinyPaths(del))
 });
 
 
@@ -303,4 +317,4 @@ gulp.task('publish:examples', ['build:examples'], function() {
 	return gulp.src(EXAMPLE_DIST_PATH + '/**/*').pipe(deploy());
 });
 
-gulp.task('release', ['publish:tag', 'publish:npm', 'publish:examples']);
+gulp.task('release', ['publish:tag', 'release:npm', 'publish:examples']);
