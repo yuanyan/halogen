@@ -1,6 +1,6 @@
 {
   "name": "halogen",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "description": "A collection of loading spinners with React.js",
   "main": "Halogen.js",
   "author": "Yuanyan Cao",
