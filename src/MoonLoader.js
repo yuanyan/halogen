@@ -13,12 +13,14 @@ var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
     propTypes: {
+        loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
     },
     getDefaultProps: function(){
         return {
+            loading: true,
             color: '#ffffff',
             size: '60px'
         };
@@ -72,13 +74,22 @@ var Loader = React.createClass({
         }
 
     },
-    render: function () {
+    renderLoader: function(loading) {
+        if(loading) {
+            return (
+                <div>
+                    <div style={this.getStyle(0)}>
+                        <div style={this.getStyle(1)}></div>
+                        <div style={this.getStyle(2)}></div>
+                    </div>
+                </div>
+            );
+        }
 
-        return (
-            <div style={this.getStyle(0)}>
-                <div style={this.getStyle(1)}></div>
-                <div style={this.getStyle(2)}></div>
-            </div>);
+        return null;
+    },
+    render: function () {
+        return this.renderLoader(this.props.loading);
     }
 });
 

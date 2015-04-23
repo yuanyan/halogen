@@ -6,6 +6,7 @@ var animations = {};
 
 var Loader = React.createClass({
     propTypes: {
+        loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.number,
         margin: React.PropTypes.number
@@ -13,6 +14,7 @@ var Loader = React.createClass({
     getDefaultProps: function(){
 
         return {
+            loading: true,
             color: '#ffffff',
             size: 25,
             margin: 2
@@ -85,19 +87,31 @@ var Loader = React.createClass({
 
 
     },
-    render: function () {
+    renderLoader: function(loading) {
+        if(loading) {
 
-        var style = {
-            position: 'relative',
-            fontSize: 0
-        };
-        return (<div style={style}>
-            <div style={this.getStyle(1)}/>
-            <div style={this.getStyle(2)}/>
-            <div style={this.getStyle(3)}/>
-            <div style={this.getStyle(4)}/>
-            <div style={this.getStyle(5)}/>
-        </div>);
+            var style = {
+                position: 'relative',
+                fontSize: 0
+            };
+
+            return (
+                <div>
+                    <div style={style}>
+                        <div style={this.getStyle(1)}/>
+                        <div style={this.getStyle(2)}/>
+                        <div style={this.getStyle(3)}/>
+                        <div style={this.getStyle(4)}/>
+                        <div style={this.getStyle(5)}/>
+                    </div>
+                </div>
+            );
+        }
+
+        return null;
+    },
+    render: function () {
+        return this.renderLoader(this.props.loading);
     }
 });
 

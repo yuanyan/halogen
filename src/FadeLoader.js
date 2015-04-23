@@ -15,6 +15,7 @@ var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
     propTypes: {
+        loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         height: React.PropTypes.string,
         width: React.PropTypes.string,
@@ -23,6 +24,7 @@ var Loader = React.createClass({
     },
     getDefaultProps: function(){
         return {
+            loading: true,
             color: '#ffffff',
             height: '15px',
             width: '5px',
@@ -105,23 +107,34 @@ var Loader = React.createClass({
             }
         )
     },
+    renderLoader: function(loading) {
+        if(loading) {
+
+            var style = {
+                position: 'relative',
+                fontSize: 0
+            };
+
+            return (
+                <div>
+                    <div style={style}>
+                        <div style={this.getStyle(1)}></div>
+                        <div style={this.getStyle(2)}></div>
+                        <div style={this.getStyle(3)}></div>
+                        <div style={this.getStyle(4)}></div>
+                        <div style={this.getStyle(5)}></div>
+                        <div style={this.getStyle(6)}></div>
+                        <div style={this.getStyle(7)}></div>
+                        <div style={this.getStyle(8)}></div>
+                    </div>
+                </div>
+            );
+        }
+
+        return null;
+    },
     render: function () {
-
-        var style = {
-            position: 'relative',
-            fontSize: 0
-        };
-
-        return (<div style={style}>
-            <div style={this.getStyle(1)}></div>
-            <div style={this.getStyle(2)}></div>
-            <div style={this.getStyle(3)}></div>
-            <div style={this.getStyle(4)}></div>
-            <div style={this.getStyle(5)}></div>
-            <div style={this.getStyle(6)}></div>
-            <div style={this.getStyle(7)}></div>
-            <div style={this.getStyle(8)}></div>
-        </div>);
+        return this.renderLoader(this.props.loading);
     }
 });
 

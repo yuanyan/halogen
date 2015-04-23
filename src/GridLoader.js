@@ -24,12 +24,14 @@ function random(top){
 
 var Loader = React.createClass({
     propTypes: {
+        loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
     },
     getDefaultProps: function(){
         return {
+            loading: true,
             color: '#ffffff',
             size: '15px',
             margin: '2px'
@@ -67,22 +69,35 @@ var Loader = React.createClass({
             }
         )
     },
+    renderLoader: function(loading) {
+        if(loading) {
+
+            var style = {
+                width: (parseFloat(this.props.size) * 3) + parseFloat(this.props.margin) * 6,
+                fontSize: 0
+            };
+
+            return (
+                <div>
+                    <div style={style}>
+                        <div style={this.getStyle(1)}></div>
+                        <div style={this.getStyle(2)}></div>
+                        <div style={this.getStyle(3)}></div>
+                        <div style={this.getStyle(4)}></div>
+                        <div style={this.getStyle(5)}></div>
+                        <div style={this.getStyle(6)}></div>
+                        <div style={this.getStyle(7)}></div>
+                        <div style={this.getStyle(8)}></div>
+                        <div style={this.getStyle(9)}></div>
+                    </div>
+                </div>
+            );
+        }
+
+        return null;
+    },
     render: function () {
-        var style = {
-            width: (parseFloat(this.props.size) * 3) + parseFloat(this.props.margin) * 6,
-            fontSize: 0
-        };
-        return (<div style={style}>
-            <div style={this.getStyle(1)}></div>
-            <div style={this.getStyle(2)}></div>
-            <div style={this.getStyle(3)}></div>
-            <div style={this.getStyle(4)}></div>
-            <div style={this.getStyle(5)}></div>
-            <div style={this.getStyle(6)}></div>
-            <div style={this.getStyle(7)}></div>
-            <div style={this.getStyle(8)}></div>
-            <div style={this.getStyle(9)}></div>
-        </div>);
+        return this.renderLoader(this.props.loading);
     }
 });
 
