@@ -2,6 +2,9 @@ var React = require('react');
 var assign = require('react-kit/appendVendorPrefix');
 var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
+/**
+ * @type {Object}
+ */
 var keyframes = {
     '0%': {
         transform: 'scaley(1.0)'
@@ -14,9 +17,15 @@ var keyframes = {
     }
 };
 
+/**
+ * @type {String}
+ */
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
+    /**
+     * @type {Object}
+     */
     propTypes: {
         loading: React.PropTypes.bool,
         color: React.PropTypes.string,
@@ -25,7 +34,11 @@ var Loader = React.createClass({
         margin: React.PropTypes.string,
         radius: React.PropTypes.string
     },
-    getDefaultProps: function(){
+
+    /**
+     * @return {Object}
+     */
+    getDefaultProps: function() {
         return {
             loading: true,
             color: '#ffffff',
@@ -35,36 +48,54 @@ var Loader = React.createClass({
             radius: '2px'
         };
     },
-    getLineStyle: function () {
+
+    /**
+     * @return {Object}
+     */
+    getLineStyle: function() {
         return {
             backgroundColor: this.props.color,
             height: this.props.height,
             width: this.props.width,
             margin: this.props.margin,
             borderRadius: this.props.radius
-        }
+        };
     },
-    getAnimationStyle: function (i) {
 
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getAnimationStyle: function(i) {
         var animation = [animationName, '1s', (i * 0.1) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
             animationFillMode: animationFillMode
-        }
+        };
     },
-    getStyle: function (i) {
 
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getStyle: function(i) {
         return assign(
             this.getLineStyle(i),
             this.getAnimationStyle(i),
             {
                 display: 'inline-block'
             }
-        )
+        );
     },
+
+    /**
+     * @param  {Boolean} loading
+     * @return {ReactComponent || null}
+     */
     renderLoader: function(loading) {
-        if(loading) {
+        if (loading) {
             return (
                 <div {...this.props}>
                     <div style={this.getStyle(1)}></div>
@@ -78,7 +109,8 @@ var Loader = React.createClass({
 
         return null;
     },
-    render: function () {
+
+    render: function() {
         return this.renderLoader(this.props.loading);
     }
 });

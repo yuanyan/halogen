@@ -2,17 +2,26 @@ var React = require('react');
 var assign = require('react-kit/appendVendorPrefix');
 var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
+/**
+ * @type {Object}
+ */
 var animations = {};
 
 var Loader = React.createClass({
+    /**
+     * @type {Object}
+     */
     propTypes: {
         loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.number,
         margin: React.PropTypes.number
     },
-    getDefaultProps: function(){
 
+    /**
+     * @return {Object}
+     */
+    getDefaultProps: function() {
         return {
             loading: true,
             color: '#ffffff',
@@ -20,20 +29,29 @@ var Loader = React.createClass({
             margin: 2
         };
     },
-    getBallStyle: function () {
+
+    /**
+     * @return {Object}
+     */
+    getBallStyle: function() {
         return {
             backgroundColor: this.props.color,
             width: this.props.size,
             height: this.props.size,
             margin: this.props.margin,
             borderRadius: '100%'
-        }
+        };
     },
-    getAnimationStyle: function (i) {
 
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getAnimationStyle: function(i) {
         var size = this.props.size;
         var animationName = animations[size];
-        if(!animationName){
+
+        if (! animationName) {
             var keyframes = {
                 '75%': {
                     opacity: 0.7
@@ -51,11 +69,15 @@ var Loader = React.createClass({
         return {
             animation: animation,
             animationFillMode: animationFillMode
-        }
+        };
     },
-    getStyle: function (i) {
 
-        if(i == 1){
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getStyle: function(i) {
+        if (i == 1) {
             var s1 =  this.props.size + 'px solid transparent';
             var s2 =  this.props.size + 'px solid ' + this.props.color;
 
@@ -67,29 +89,29 @@ var Loader = React.createClass({
                 borderLeft: s2,
                 borderBottom: s2,
                 borderRadius: this.props.size
-            }
-
-        }else{
-
-            return assign(
-                this.getBallStyle(i),
-                this.getAnimationStyle(i),
-                {
-                    width: 10,
-                    height: 10,
-                    transform: 'translate(0, '+ -this.props.size / 4 + 'px)',
-                    position: 'absolute',
-                    top: 25,
-                    left: 100
-                }
-            )
+            };
         }
-
-
+        
+        return assign(
+            this.getBallStyle(i),
+            this.getAnimationStyle(i),
+            {
+                width: 10,
+                height: 10,
+                transform: 'translate(0, '+ -this.props.size / 4 + 'px)',
+                position: 'absolute',
+                top: 25,
+                left: 100
+            }
+        );
     },
-    renderLoader: function(loading) {
-        if(loading) {
 
+    /**
+     * @param  {Boolean} loading
+     * @return {ReactComponent || null}
+     */
+    renderLoader: function(loading) {
+        if (loading) {
             var style = {
                 position: 'relative',
                 fontSize: 0
@@ -110,7 +132,8 @@ var Loader = React.createClass({
 
         return null;
     },
-    render: function () {
+
+    render: function() {
         return this.renderLoader(this.props.loading);
     }
 });

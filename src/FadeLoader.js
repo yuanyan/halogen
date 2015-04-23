@@ -2,6 +2,9 @@ var React = require('react');
 var assign = require('react-kit/appendVendorPrefix');
 var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
+/**
+ * @type {Object}
+ */
 var keyframes = {
     '50%': {
         opacity: 0.3
@@ -11,9 +14,15 @@ var keyframes = {
     }
 };
 
+/**
+ * @type {String}
+ */
 var animationName = insertKeyframesRule(keyframes);
 
 var Loader = React.createClass({
+    /**
+     * @type {Object}
+     */
     propTypes: {
         loading: React.PropTypes.bool,
         color: React.PropTypes.string,
@@ -22,7 +31,11 @@ var Loader = React.createClass({
         margin: React.PropTypes.string,
         radius: React.PropTypes.string
     },
-    getDefaultProps: function(){
+
+    /**
+     * @return {Object}
+     */
+    getDefaultProps: function() {
         return {
             loading: true,
             color: '#ffffff',
@@ -32,27 +45,43 @@ var Loader = React.createClass({
             radius: '2px'
         };
     },
-    getLineStyle: function (i) {
+
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getLineStyle: function(i) {
         return {
             backgroundColor: this.props.color,
             height: this.props.height,
             width: this.props.width,
             margin: this.props.margin,
             borderRadius: this.props.radius
-        }
+        };
     },
-    getAnimationStyle: function (i) {
 
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getAnimationStyle: function(i) {
         var animation = [animationName, '1.2s', (i * 0.12) + 's', 'infinite', 'ease-in-out'].join(' ');
         var animationFillMode = 'both';
+
         return {
             animation: animation,
             animationFillMode: animationFillMode
-        }
+        };
     },
-    getPosStyle: function(i){
+
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getPosStyle: function(i) {
         var radius = '20';
         var quarter = (radius / 2) + (radius / 5.5);
+
         var lines = {
             l1: {
                 top: radius,
@@ -96,8 +125,12 @@ var Loader = React.createClass({
 
         return lines['l'+i];
     },
-    getStyle: function (i) {
 
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getStyle: function(i) {
         return assign(
             this.getLineStyle(i),
             this.getPosStyle(i),
@@ -105,11 +138,15 @@ var Loader = React.createClass({
             {
                 position: 'absolute'
             }
-        )
+        );
     },
-    renderLoader: function(loading) {
-        if(loading) {
 
+    /**
+     * @param  {Boolean} loading
+     * @return {ReactComponent || null}
+     */
+    renderLoader: function(loading) {
+        if (loading) {
             var style = {
                 position: 'relative',
                 fontSize: 0
@@ -133,7 +170,8 @@ var Loader = React.createClass({
 
         return null;
     },
-    render: function () {
+
+    render: function() {
         return this.renderLoader(this.props.loading);
     }
 });

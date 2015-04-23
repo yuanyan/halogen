@@ -2,6 +2,9 @@ var React = require('react');
 var assign = require('react-kit/appendVendorPrefix');
 var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
+/**
+ * @type {Object}
+ */
 var keyframes = {
     '0%': {
         transform: 'scale(1)'
@@ -16,20 +19,34 @@ var keyframes = {
     }
 };
 
+/**
+ * @type {String}
+ */
 var animationName = insertKeyframesRule(keyframes);
 
-function random(top){
+/**
+ * @param  {Number} top
+ * @return {Number}
+ */
+function random(top) {
     return Math.random() * top
 }
 
 var Loader = React.createClass({
+    /**
+     * @type {Object}
+     */
     propTypes: {
         loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
     },
-    getDefaultProps: function(){
+
+    /**
+     * @return {Object}
+     */
+    getDefaultProps: function() {
         return {
             loading: true,
             color: '#ffffff',
@@ -37,17 +54,25 @@ var Loader = React.createClass({
             margin: '2px'
         };
     },
-    getBallStyle: function () {
+
+    /**
+     * @return {Object}
+     */
+    getBallStyle: function() {
         return {
             backgroundColor: this.props.color,
             width: this.props.size,
             height: this.props.size,
             margin: this.props.margin,
             borderRadius: '100%'
-        }
+        };
     },
-    getAnimationStyle: function (i) {
 
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getAnimationStyle: function(i) {
         var animationDuration = ((random(100) / 100) + 0.6) + 's';
         var animationDelay = ((random(100) / 100) - 0.2) + 's';
 
@@ -57,21 +82,29 @@ var Loader = React.createClass({
         return {
             animation: animation,
             animationFillMode: animationFillMode
-        }
+        };
     },
-    getStyle: function (i) {
 
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getStyle: function(i) {
         return assign(
             this.getBallStyle(i),
             this.getAnimationStyle(i),
             {
                 display: 'inline-block'
             }
-        )
+        );
     },
-    renderLoader: function(loading) {
-        if(loading) {
 
+    /**
+     * @param  {Boolean} loading
+     * @return {ReactComponent || null}
+     */
+    renderLoader: function(loading) {
+        if (loading) {
             var style = {
                 width: (parseFloat(this.props.size) * 3) + parseFloat(this.props.margin) * 6,
                 fontSize: 0
@@ -96,7 +129,8 @@ var Loader = React.createClass({
 
         return null;
     },
-    render: function () {
+
+    render: function() {
         return this.renderLoader(this.props.loading);
     }
 });
