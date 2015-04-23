@@ -62,7 +62,7 @@ var Loader = React.createClass({
     renderLoader: function(loading) {
         if(loading) {
             return (
-                <div>
+                <div {...this.props}>
                     <div style={this.getStyle()}></div>
                 </div>
             );

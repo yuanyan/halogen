@@ -96,7 +96,7 @@ var Loader = React.createClass({
             };
 
             return (
-                <div>
+                <div {...this.props}>
                     <div style={style}>
                         <div style={this.getStyle(1)}/>
                         <div style={this.getStyle(2)}/>
