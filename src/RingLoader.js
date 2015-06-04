@@ -2,6 +2,9 @@ var React = require('react');
 var assign = require('react-kit/appendVendorPrefix');
 var insertKeyframesRule = require('react-kit/insertKeyframesRule');
 
+/**
+ * @type {Object}
+ */
 var rightRotateKeyframes = {
     '0%': {
         transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
@@ -12,6 +15,9 @@ var rightRotateKeyframes = {
     }
 };
 
+/**
+ * @type {Object}
+ */
 var leftRotateKeyframes = {
     '0%': {
         transform: 'rotateX(0deg) rotateY(0deg) rotateZ(0deg)'
@@ -21,33 +27,57 @@ var leftRotateKeyframes = {
     }
 };
 
-
+/**
+ * @type {String}
+ */
 var rightRotateAnimationName = insertKeyframesRule(rightRotateKeyframes);
+
+/**
+ * @type {String}
+ */
 var leftRotateAnimationName = insertKeyframesRule(leftRotateKeyframes);
 
 var Loader = React.createClass({
+    /**
+     * @type {Object}
+     */
     propTypes: {
+        loading: React.PropTypes.bool,
         color: React.PropTypes.string,
         size: React.PropTypes.string,
         margin: React.PropTypes.string
     },
-    getDefaultProps: function(){
+
+    /**
+     * @return {Object}
+     */
+    getDefaultProps: function() {
         return {
+            loading: true,
             color: '#ffffff',
             size: '60px'
         };
     },
-    getCircleStyle: function (size) {
+
+    /**
+     * @param {String} size
+     * @return {Object}
+     */
+    getCircleStyle: function(size) {
         return {
             width: size,
             height: size,
             border: size/10 +'px solid ' + this.props.color,
             opacity: 0.4,
             borderRadius: '100%'
-        }
+        };
     },
-    getAnimationStyle: function (i) {
 
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getAnimationStyle: function(i) {
         var animation = [i==1? rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
         var perspective = '800px';
@@ -56,11 +86,17 @@ var Loader = React.createClass({
             perspective: perspective,
             animation: animation,
             animationFillMode: animationFillMode
-        }
+        };
     },
-    getStyle: function (i) {
+
+    /**
+     * @param  {Number} i
+     * @return {Object}
+     */
+    getStyle: function(i) {
         var size = parseInt(this.props.size);
-        if(i) {
+
+        if (i) {
             return assign(
                 this.getCircleStyle(size),
                 this.getAnimationStyle(i),
@@ -69,24 +105,37 @@ var Loader = React.createClass({
                     top: 0,
                     left: 0
                 }
-            )
-        }else{
-            return {
-                width: size,
-                height: size,
-                position: 'relative'
-            }
-
+            );
         }
 
+        return {
+            width: size,
+            height: size,
+            position: 'relative'
+        };
     },
-    render: function () {
 
-        return (
-            <div style={this.getStyle(0)}>
-                <div style={this.getStyle(1)}></div>
-                <div style={this.getStyle(2)}></div>
-            </div>);
+    /**
+     * @param  {Boolean} loading
+     * @return {ReactComponent || null}
+     */
+    renderLoader: function(loading) {
+        if (loading) {
+            return (
+                <div id={this.props.id} className={this.props.className}>
+                    <div style={this.getStyle(0)}>
+                        <div style={this.getStyle(1)}></div>
+                        <div style={this.getStyle(2)}></div>
+                    </div>
+                </div>
+            );
+        }
+
+        return null;
+    },
+
+    render: function() {
+        return this.renderLoader(this.props.loading);
     }
 });
 

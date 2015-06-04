@@ -33,6 +33,7 @@
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.1",
     "merge-stream": "^0.1.6",
+    "vinyl-paths": "^1.0.0",
     "vinyl-source-stream": "^1.0.0",
     "watchify": "^2.1.1",
     "gulp-react": "^3.0.1"
