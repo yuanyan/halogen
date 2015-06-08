@@ -1,6 +1,6 @@
 {
   "name": "halogen",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "A collection of loading spinners with React.js",
   "main": "Halogen.js",
   "author": "Yuanyan Cao",
@@ -47,7 +47,7 @@
     "react": "global:React"
   },
   "scripts": {
-    "test": "echo \"no tests yet\" && exit 0"
+    "release": "gulp release"
   },
   "keywords": [
     "react",
