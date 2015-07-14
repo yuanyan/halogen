@@ -1,6 +1,8 @@
 Halogen
 =======
 
+[![Pair on this](https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg)](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=halogen)
+
 A collection of loading spinners with React.js.
 
 ## Demo & Examples
