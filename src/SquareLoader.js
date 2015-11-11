@@ -54,7 +54,8 @@ var Loader = React.createClass({
         return {
             backgroundColor: this.props.color,
             width: this.props.size,
-            height: this.props.size
+            height: this.props.size,
+            verticalAlign: this.props.verticalAlign
         };
     },
 

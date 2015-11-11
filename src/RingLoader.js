@@ -69,7 +69,8 @@ var Loader = React.createClass({
             height: size,
             border: size/10 +'px solid ' + this.props.color,
             opacity: 0.4,
-            borderRadius: '100%'
+            borderRadius: '100%',
+            verticalAlign: this.props.verticalAlign
         };
     },
 

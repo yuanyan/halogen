@@ -64,7 +64,8 @@ var Loader = React.createClass({
             backgroundColor: this.props.color,
             width: size,
             height: size,
-            borderRadius: '100%'
+            borderRadius: '100%',
+            verticalAlign: this.props.verticalAlign
         };
     },
 
@@ -100,7 +101,7 @@ var Loader = React.createClass({
                     bottom: i%2? 'auto': 0
                 }
             );
-        } 
+        }
 
         return assign(
             this.getAnimationStyle(i),

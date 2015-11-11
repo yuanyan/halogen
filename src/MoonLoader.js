@@ -46,7 +46,8 @@ var Loader = React.createClass({
         return {
             width: size,
             height: size,
-            borderRadius: '100%'
+            borderRadius: '100%',
+            verticalAlign: this.props.verticalAlign
         };
     },
 
@@ -83,7 +84,7 @@ var Loader = React.createClass({
                     top: size/2 - moonSize/2
                 }
             );
-        } 
+        }
         else if (i == 2) {
             return assign(
                 this.getBallStyle(size),
@@ -92,7 +93,7 @@ var Loader = React.createClass({
                     opacity: 0.1
                 }
             );
-        } 
+        }
         else {
             return assign(
                 this.getAnimationStyle(i),

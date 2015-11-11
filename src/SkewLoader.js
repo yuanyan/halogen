@@ -55,7 +55,8 @@ var Loader = React.createClass({
             height: 0,
             borderLeft: this.props.size + ' solid transparent',
             borderRight: this.props.size + ' solid transparent',
-            borderBottom: this.props.size + ' solid '+ this.props.color
+            borderBottom: this.props.size + ' solid '+ this.props.color,
+            verticalAlign: this.props.verticalAlign
         };
     },
 
