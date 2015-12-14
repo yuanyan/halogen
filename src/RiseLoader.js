@@ -91,7 +91,8 @@ var Loader = React.createClass({
             width: this.props.size,
             height: this.props.size,
             margin: this.props.margin,
-            borderRadius: '100%'
+            borderRadius: '100%',
+            verticalAlign: this.props.verticalAlign
         };
     },
 

@@ -52,7 +52,8 @@ var Loader = React.createClass({
             opacity: 0.6,
             position: 'absolute',
             top: 0,
-            left: 0
+            left: 0,
+            verticalAlign: this.props.verticalAlign
         };
     },
 
@@ -109,7 +110,7 @@ var Loader = React.createClass({
 
         return null;
     },
-    
+
     render: function() {
         return this.renderLoader(this.props.loading);
     }
