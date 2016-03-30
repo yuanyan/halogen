@@ -14,9 +14,8 @@ var browserify = require('browserify'),
 	uglify = require('gulp-uglify'),
 	gutil = require('gulp-util'),
 	merge = require('merge-stream'),
-	reactify = require('reactify'),
-	react = require('gulp-react'),
 	source = require('vinyl-source-stream'),
+	babel = require('gulp-babel');
 	watchify = require('watchify');
 
 
@@ -31,7 +30,7 @@ var COMPONENT_NAME = 'Halogen';
 var PACKAGE_FILE =  COMPONENT_NAME + '.js';
 var PACKAGE_NAME = COMPONENT_NAME.toLowerCase();
 
-var DEPENDENCIES = ['react'];
+var DEPENDENCIES = ['react', 'react-dom'];
 
 var EXAMPLE_SRC_PATH = 'example/src';
 var EXAMPLE_DIST_PATH = 'example/dist';
@@ -41,7 +40,6 @@ var EXAMPLE_COPY = [
     'node_modules/codemirror/lib/codemirror.js',
     'node_modules/codemirror/lib/codemirror.css',
     'node_modules/codemirror/mode/javascript/javascript.js',
-    'node_modules/react/dist/JSXTransformer.js'
 ];
 var EXAMPLE_LESS = 'app.less';
 var EXAMPLE_FILES = [
@@ -128,9 +126,9 @@ function buildExampleScripts(dev) {
 
 	return function() {
 
-		var common = browserify(opts),
-			bundle = browserify(opts).require('./' + SRC_PATH + '/' + PACKAGE_FILE, { expose: PACKAGE_NAME }),
-			example = browserify(opts).exclude(PACKAGE_NAME).add('./' + EXAMPLE_SRC_PATH + '/' + EXAMPLE_APP);
+		var common = browserify(opts).transform('babelify', {presets: ["es2015", "react"]}),
+			bundle = browserify(opts).require('./' + SRC_PATH + '/' + PACKAGE_FILE, { expose: PACKAGE_NAME }).transform('babelify', {presets: ["es2015", "react"]}),
+			example = browserify(opts).exclude(PACKAGE_NAME).add('./' + EXAMPLE_SRC_PATH + '/' + EXAMPLE_APP).transform('babelify', {presets: ["es2015", "react"]});
 
 		DEPENDENCIES.forEach(function(pkg) {
 			common.require(pkg);
@@ -220,7 +218,7 @@ gulp.task('build:dist', ['prepare:dist'], function() {
 	var standalone = browserify('./' + SRC_PATH + '/' + PACKAGE_FILE, {
 			standalone: COMPONENT_NAME
 		})
-		.transform(reactify)
+		.transform("babelify", {presets: ["es2015", "react"]})
 		.transform(shim);
 
 	DEPENDENCIES.forEach(function(pkg) {
@@ -291,7 +289,9 @@ gulp.task('publish:tag', function(done) {
  */
 function buildToRoot(){
 	return gulp.src(SRC_PATH + '/*.js')
-		.pipe(react())
+		.pipe(babel({
+			presets: ['es2015', 'react']
+		}))
 		.pipe(gulp.dest('./'))
 }
 

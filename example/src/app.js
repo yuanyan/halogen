@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 
 var selfCleaningTimeout = {
     componentDidUpdate: function() {
@@ -44,19 +45,19 @@ var ComponentPreview = React.createClass({
     },
 
     executeCode: function() {
-        var mountNode = this.refs.mount.getDOMNode();
+        var mountNode = this.refs.mount;
 
         try {
-            React.unmountComponentAtNode(mountNode);
+            ReactDOM.unmountComponentAtNode(mountNode);
         } catch (e) { }
 
         try {
             var compiledCode = this.compileCode();
-            React.render(eval(compiledCode), mountNode);
+            ReactDOM.render(eval(compiledCode), mountNode);
         } catch (err) {
             debugger
             this.setTimeout(function() {
-                React.render(
+                ReactDOM.render(
                     <div className="playgroundError">{err.toString()}</div>,
                     mountNode
                 );
@@ -79,7 +80,7 @@ var CodeMirrorEditor = React.createClass({
     componentDidMount: function() {
         if (IS_MOBILE) return;
 
-        this.editor = CodeMirror.fromTextArea(this.refs.editor.getDOMNode(), {
+        this.editor = CodeMirror.fromTextArea(this.refs.editor, {
             mode: 'javascript',
             //lineNumbers: true,
             viewportMargin: Infinity,
@@ -175,7 +176,7 @@ var ReactPlayground = React.createClass({
 for(var id=1; id<10; id++){
     var example = document.getElementById('example'+id);
     if(example){
-        React.render(
+        ReactDOM.render(
             <ReactPlayground codeText={document.getElementById('code'+id).innerHTML} />,
             example
         );
