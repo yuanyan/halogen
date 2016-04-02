@@ -20,21 +20,21 @@ var Example = React.createClass({
         var style = {
             display: '-webkit-flex',
             display: 'flex',
-            webkitFlex: '0 1 auto',
+            WebkitFlex: '0 1 auto',
             flex: '0 1 auto',
-            webkitFlexDirection: 'column',
+            WebkitFlexDirection: 'column',
             flexDirection: 'column',
-            webkitFlexGrow: 1,
+            WebkitFlexGrow: 1,
             flexGrow: 1,
-            webkitFlexShrink: 0,
+            WebkitFlexShrink: 0,
             flexShrink: 0,
-            webkitFlexBasis: '25%',
+            WebkitFlexBasis: '25%',
             flexBasis: '25%',
             maxWidth: '25%',
             height: '200px',
-            webkitAlignItems: 'center',
+            WebkitAlignItems: 'center',
             alignItems: 'center',
-            webkitJustifyContent: 'center',
+            WebkitJustifyContent: 'center',
             justifyContent: 'center'
         };
 
@@ -43,11 +43,11 @@ var Example = React.createClass({
                 boxSizing: 'border-box',
                 display: '-webkit-flex',
                 display: 'flex',
-                webkitFlex: '0 1 auto',
+                WebkitFlex: '0 1 auto',
                 flex: '0 1 auto',
-                webkitFlexDirection: 'row',
+                WebkitFlexDirection: 'row',
                 flexDirection: 'row',
-                webkitFlexWrap: 'wrap',
+                WebkitFlexWrap: 'wrap',
                 flexWrap: 'wrap'
             }}>
                 <div style={style}><Halogen.PulseLoader color={color}/></div>
@@ -112,7 +112,7 @@ return <Example/>
 
 <script src="codemirror.js"></script>
 <script src="javascript.js"></script>
-<script src="JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
 
 <script src="common.js"></script>
 <script src="bundle.js"></script>
