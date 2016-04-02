@@ -1,4 +1,4 @@
-Halogen
+Halogen [![npm version](https://badge.fury.io/js/halogen.svg)](http://badge.fury.io/js/halogen)
 =======
 
 [![Pair on this](https://tf-assets-staging.s3.amazonaws.com/badges/thinkful_repo_badge.svg)](http://start.thinkful.com/react/?utm_source=github&utm_medium=badge&utm_campaign=halogen)
