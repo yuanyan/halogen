@@ -1,6 +1,6 @@
 var React = require('react');
-var assign = require('react-kit/appendVendorPrefix');
-var insertKeyframesRule = require('react-kit/insertKeyframesRule');
+var assign = require('domkit/appendVendorPrefix');
+var insertKeyframesRule = require('domkit/insertKeyframesRule');
 
 /**
  * @type {Number}

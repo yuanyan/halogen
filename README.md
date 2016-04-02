@@ -5,6 +5,9 @@ Halogen
 
 A collection of loading spinners with React.js.
 
+* React 0.14+ Use `halogen 0.2`
+* React 0.12+ Use `halogen 0.1`
+
 ## Demo & Examples
 
 Live demo: [yuanyan.github.io/halogen](http://yuanyan.github.io/halogen/)
