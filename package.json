@@ -3,11 +3,11 @@
   "version": "0.2.0",
   "description": "A collection of loading spinners with React.js",
   "main": "Halogen.js",
-  "author": "Yuanyan Cao",
+  "author": "Yuanyan Cao, Vladymir Gonzalez",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yuanyan/halogen.git"
+    "url": "https://github.com/kuez/halogen.git"
   },
   "dependencies": {
     "domkit": "0.0.1",
