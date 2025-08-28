@@ -14,17 +14,7 @@ class Loader extends React.Component {
      */
     /**
      * @return {Object}
-     */
-    getDefaultProps() {
-        return {
-            loading: true,
-            color: '#ffffff',
-            size: 25,
-            margin: 2
-        };
-    },
-
-    /**
+     *//**
      * @return {Object}
      */
     getBallStyle() {
@@ -131,14 +121,21 @@ class Loader extends React.Component {
     render() {
         return this.renderLoader(this.props.loading);
     }
-});
+}
 
 
 Loader.propTypes = {
     loading: PropTypes.bool,
-        color: PropTypes.string,
-        size: PropTypes.number,
-        margin: PropTypes.number
+    color: PropTypes.string,
+    size: PropTypes.number,
+    margin: PropTypes.number
 };
 
+
+Loader.defaultProps = {
+    loading: true,
+    color: '#ffffff',
+    size: 25,
+    margin: 2
+};
 module.exports = Loader;

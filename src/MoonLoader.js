@@ -23,16 +23,7 @@ class Loader extends React.Component {
      */
     /**
      * @return {Object}
-     */
-    getDefaultProps() {
-        return {
-            loading: true,
-            color: '#ffffff',
-            size: '60px'
-        };
-    },
-
-    /**
+     *//**
      * @param  {String} size
      * @return {Object}
      */
@@ -120,14 +111,20 @@ class Loader extends React.Component {
     render() {
         return this.renderLoader(this.props.loading);
     }
-});
+}
 
 
 Loader.propTypes = {
     loading: PropTypes.bool,
-        color: PropTypes.string,
-        size: PropTypes.string,
-        margin: PropTypes.string
+    color: PropTypes.string,
+    size: PropTypes.string,
+    margin: PropTypes.string
 };
 
+
+Loader.defaultProps = {
+    loading: true,
+    color: '#ffffff',
+    size: '60px'
+};
 module.exports = Loader;

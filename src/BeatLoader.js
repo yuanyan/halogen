@@ -21,21 +21,6 @@ var animationName = insertKeyframesRule(keyframes);
 
 class Loader extends React.Component {
     /**
-     * @type {Object}
-     */
-    /**
-     * @return {Object}
-     */
-    getDefaultProps() {
-        return {
-            loading: true,
-            color: '#ffffff',
-            size: '15px',
-            margin: '2px'
-        };
-    },
-
-    /**
      * @return {Object}
      */
     getBallStyle() {
@@ -98,14 +83,20 @@ class Loader extends React.Component {
     render() {
         return this.renderLoader(this.props.loading);
     }
-});
-
+}
 
 Loader.propTypes = {
     loading: PropTypes.bool,
-        color: PropTypes.string,
-        size: PropTypes.string,
-        margin: PropTypes.string
+    color: PropTypes.string,
+    size: PropTypes.string,
+    margin: PropTypes.string
+};
+
+Loader.defaultProps = {
+    loading: true,
+    color: '#ffffff',
+    size: '15px',
+    margin: '2px'
 };
 
 module.exports = Loader;

@@ -26,19 +26,7 @@ class Loader extends React.Component {
      */
     /**
      * @return {Object}
-     */
-    getDefaultProps() {
-        return {
-            loading: true,
-            color: '#ffffff',
-            height: '15px',
-            width: '5px',
-            margin: '2px',
-            radius: '2px'
-        };
-    },
-
-    /**
+     *//**
      * @param  {Number} i
      * @return {Object}
      */
@@ -167,16 +155,25 @@ class Loader extends React.Component {
     render() {
         return this.renderLoader(this.props.loading);
     }
-});
+}
 
 
 Loader.propTypes = {
     loading: PropTypes.bool,
-        color: PropTypes.string,
-        height: PropTypes.string,
-        width: PropTypes.string,
-        margin: PropTypes.string,
-        radius: PropTypes.string
+    color: PropTypes.string,
+    height: PropTypes.string,
+    width: PropTypes.string,
+    margin: PropTypes.string,
+    radius: PropTypes.string
 };
 
+
+Loader.defaultProps = {
+    loading: true,
+    color: '#ffffff',
+    height: '15px',
+    width: '5px',
+    margin: '2px',
+    radius: '2px'
+};
 module.exports = Loader;

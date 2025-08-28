@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var PropTypes = require('prop-types');
 
 var selfCleaningTimeout = {
     componentDidUpdate: function() {
@@ -14,7 +15,7 @@ var selfCleaningTimeout = {
 
 var ComponentPreview = React.createClass({
     propTypes: {
-        code: React.PropTypes.string.isRequired
+        code: PropTypes.string.isRequired
     },
 
     mixins: [selfCleaningTimeout],
@@ -124,7 +125,7 @@ var CodeMirrorEditor = React.createClass({
 
 var ReactPlayground = React.createClass({
     propTypes: {
-        codeText: React.PropTypes.string.isRequired
+        codeText: PropTypes.string.isRequired
     },
 
     getInitialState: function() {
