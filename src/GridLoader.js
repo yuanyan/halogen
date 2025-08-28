@@ -33,21 +33,14 @@ function random(top) {
     return Math.random() * top
 }
 
-var Loader = React.createClass({
+class Loader extends React.Component {
     /**
      * @type {Object}
      */
-    propTypes: {
-        loading: PropTypes.bool,
-        color: PropTypes.string,
-        size: PropTypes.string,
-        margin: PropTypes.string
-    },
-
     /**
      * @return {Object}
      */
-    getDefaultProps: function() {
+    getDefaultProps() {
         return {
             loading: true,
             color: '#ffffff',
@@ -59,7 +52,7 @@ var Loader = React.createClass({
     /**
      * @return {Object}
      */
-    getBallStyle: function() {
+    getBallStyle() {
         return {
             backgroundColor: this.props.color,
             width: this.props.size,
@@ -74,7 +67,7 @@ var Loader = React.createClass({
      * @param  {Number} i
      * @return {Object}
      */
-    getAnimationStyle: function(i) {
+    getAnimationStyle(i) {
         var animationDuration = ((random(100) / 100) + 0.6) + 's';
         var animationDelay = ((random(100) / 100) - 0.2) + 's';
 
@@ -91,7 +84,7 @@ var Loader = React.createClass({
      * @param  {Number} i
      * @return {Object}
      */
-    getStyle: function(i) {
+    getStyle(i) {
         return assign(
             this.getBallStyle(i),
             this.getAnimationStyle(i),
@@ -105,7 +98,7 @@ var Loader = React.createClass({
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
-    renderLoader: function(loading) {
+    renderLoader(loading) {
         if (loading) {
             var style = {
                 width: (parseFloat(this.props.size) * 3) + parseFloat(this.props.margin) * 6,
@@ -130,11 +123,19 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
+    }
 
-    render: function() {
+    render() {
         return this.renderLoader(this.props.loading);
     }
 });
+
+
+Loader.propTypes = {
+    loading: PropTypes.bool,
+        color: PropTypes.string,
+        size: PropTypes.string,
+        margin: PropTypes.string
+};
 
 module.exports = Loader;

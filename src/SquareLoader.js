@@ -26,21 +26,14 @@ var keyframes = {
  */
 var animationName = insertKeyframesRule(keyframes);
 
-var Loader = React.createClass({
+class Loader extends React.Component {
     /**
      * @type {Object}
      */
-    propTypes: {
-        loading: PropTypes.bool,
-        color: PropTypes.string,
-        size: PropTypes.string,
-        margin: PropTypes.string
-    },
-
     /**
      * @return {Object}
      */
-    getDefaultProps: function() {
+    getDefaultProps() {
         return {
             loading: true,
             color: '#ffffff',
@@ -51,7 +44,7 @@ var Loader = React.createClass({
     /**
      * @return {Object}
      */
-    getSquareStyle: function() {
+    getSquareStyle() {
         return {
             backgroundColor: this.props.color,
             width: this.props.size,
@@ -64,7 +57,7 @@ var Loader = React.createClass({
      * @param  {Number} i
      * @return {Object}
      */
-    getAnimationStyle: function(i) {
+    getAnimationStyle(i) {
         var animation = [animationName, '3s', '0s', 'infinite', 'cubic-bezier(.09,.57,.49,.9)'].join(' ');
         var animationFillMode = 'both';
         var perspective = '100px';
@@ -80,7 +73,7 @@ var Loader = React.createClass({
      * @param  {Number} i
      * @return {Object}
      */
-    getStyle: function(i) {
+    getStyle(i) {
         return assign(
             this.getSquareStyle(i),
             this.getAnimationStyle(i),
@@ -94,7 +87,7 @@ var Loader = React.createClass({
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
-    renderLoader: function(loading) {
+    renderLoader(loading) {
         if (loading) {
             return (
                 <div id={this.props.id} className={this.props.className}>
@@ -104,11 +97,19 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
+    }
 
-    render: function() {
+    render() {
         return this.renderLoader(this.props.loading);
     }
 });
+
+
+Loader.propTypes = {
+    loading: PropTypes.bool,
+        color: PropTypes.string,
+        size: PropTypes.string,
+        margin: PropTypes.string
+};
 
 module.exports = Loader;

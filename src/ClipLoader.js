@@ -23,31 +23,11 @@ var keyframes = {
  */
 var animationName = insertKeyframesRule(keyframes);
 
-var Loader = React.createClass({
-    /**
-     * @type {Object}
-     */
-    propTypes: {
-        loading: PropTypes.bool,
-        color: PropTypes.string,
-        size: PropTypes.string
-    },
-
+class Loader extends React.Component {
     /**
      * @return {Object}
      */
-    getDefaultProps: function() {
-        return {
-            loading: true,
-            color: '#ffffff',
-            size: '35px'
-        };
-    },
-
-    /**
-     * @return {Object}
-     */
-    getBallStyle: function() {
+    getBallStyle() {
         return {
             width: this.props.size,
             height: this.props.size,
@@ -58,13 +38,13 @@ var Loader = React.createClass({
             background: 'transparent !important',
             verticalAlign: this.props.verticalAlign
         };
-    },
+    }
 
     /**
      * @param  {Number} i
      * @return {Object}
      */
-    getAnimationStyle: function(i) {
+    getAnimationStyle(i) {
         var animation = [animationName, '0.75s', '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'both';
 
@@ -72,13 +52,13 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
+    }
 
     /**
      * @param  {Number} i
      * @return {Object}
      */
-    getStyle: function(i) {
+    getStyle(i) {
         return assign(
             this.getBallStyle(i),
             this.getAnimationStyle(i),
@@ -86,13 +66,13 @@ var Loader = React.createClass({
                 display: 'inline-block'
             }
         );
-    },
+    }
 
     /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
-    renderLoader: function(loading) {
+    renderLoader(loading) {
         if (loading) {
             return (
                 <div id={this.props.id} className={this.props.className}>
@@ -102,11 +82,23 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
+    }
 
-    render: function() {
+    render() {
         return this.renderLoader(this.props.loading);
     }
-});
+}
+
+Loader.propTypes = {
+    loading: PropTypes.bool,
+    color: PropTypes.string,
+    size: PropTypes.string
+};
+
+Loader.defaultProps = {
+    loading: true,
+    color: '#ffffff',
+    size: '35px'
+};
 
 module.exports = Loader;

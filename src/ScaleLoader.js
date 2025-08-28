@@ -23,37 +23,15 @@ var keyframes = {
  */
 var animationName = insertKeyframesRule(keyframes);
 
-var Loader = React.createClass({
-    /**
-     * @type {Object}
-     */
-    propTypes: {
-        loading: PropTypes.bool,
-        color: PropTypes.string,
-        height: PropTypes.string,
-        width: PropTypes.string,
-        margin: PropTypes.string,
-        radius: PropTypes.string
-    },
+class Loader extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
     /**
      * @return {Object}
      */
-    getDefaultProps: function() {
-        return {
-            loading: true,
-            color: '#ffffff',
-            height: '35px',
-            width: '4px',
-            margin: '2px',
-            radius: '2px'
-        };
-    },
-
-    /**
-     * @return {Object}
-     */
-    getLineStyle: function() {
+    getLineStyle() {
         return {
             backgroundColor: this.props.color,
             height: this.props.height,
@@ -62,13 +40,13 @@ var Loader = React.createClass({
             borderRadius: this.props.radius,
             verticalAlign: this.props.verticalAlign
         };
-    },
+    }
 
     /**
      * @param  {Number} i
      * @return {Object}
      */
-    getAnimationStyle: function(i) {
+    getAnimationStyle(i) {
         var animation = [animationName, '1s', (i * 0.1) + 's', 'infinite', 'cubic-bezier(.2,.68,.18,1.08)'].join(' ');
         var animationFillMode = 'both';
 
@@ -76,13 +54,13 @@ var Loader = React.createClass({
             animation: animation,
             animationFillMode: animationFillMode
         };
-    },
+    }
 
     /**
      * @param  {Number} i
      * @return {Object}
      */
-    getStyle: function(i) {
+    getStyle(i) {
         return assign(
             this.getLineStyle(i),
             this.getAnimationStyle(i),
@@ -90,13 +68,13 @@ var Loader = React.createClass({
                 display: 'inline-block'
             }
         );
-    },
+    }
 
     /**
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
-    renderLoader: function(loading) {
+    renderLoader(loading) {
         if (loading) {
             return (
                 <div id={this.props.id} className={this.props.className}>
@@ -110,11 +88,29 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
+    }
 
-    render: function() {
+    render() {
         return this.renderLoader(this.props.loading);
     }
-});
+}
+
+Loader.propTypes = {
+    loading: PropTypes.bool,
+    color: PropTypes.string,
+    height: PropTypes.string,
+    width: PropTypes.string,
+    margin: PropTypes.string,
+    radius: PropTypes.string
+};
+
+Loader.defaultProps = {
+    loading: true,
+    color: '#ffffff',
+    height: '35px',
+    width: '4px',
+    margin: '2px',
+    radius: '2px'
+};
 
 module.exports = Loader;

@@ -38,21 +38,14 @@ var rightRotateAnimationName = insertKeyframesRule(rightRotateKeyframes);
  */
 var leftRotateAnimationName = insertKeyframesRule(leftRotateKeyframes);
 
-var Loader = React.createClass({
+class Loader extends React.Component {
     /**
      * @type {Object}
      */
-    propTypes: {
-        loading: PropTypes.bool,
-        color: PropTypes.string,
-        size: PropTypes.string,
-        margin: PropTypes.string
-    },
-
     /**
      * @return {Object}
      */
-    getDefaultProps: function() {
+    getDefaultProps() {
         return {
             loading: true,
             color: '#ffffff',
@@ -64,7 +57,7 @@ var Loader = React.createClass({
      * @param {String} size
      * @return {Object}
      */
-    getCircleStyle: function(size) {
+    getCircleStyle(size) {
         return {
             width: size,
             height: size,
@@ -79,7 +72,7 @@ var Loader = React.createClass({
      * @param  {Number} i
      * @return {Object}
      */
-    getAnimationStyle: function(i) {
+    getAnimationStyle(i) {
         var animation = [i==1? rightRotateAnimationName: leftRotateAnimationName, '2s', '0s', 'infinite', 'linear'].join(' ');
         var animationFillMode = 'forwards';
         var perspective = '800px';
@@ -95,7 +88,7 @@ var Loader = React.createClass({
      * @param  {Number} i
      * @return {Object}
      */
-    getStyle: function(i) {
+    getStyle(i) {
         var size = parseInt(this.props.size);
 
         if (i) {
@@ -121,7 +114,7 @@ var Loader = React.createClass({
      * @param  {Boolean} loading
      * @return {ReactComponent || null}
      */
-    renderLoader: function(loading) {
+    renderLoader(loading) {
         if (loading) {
             return (
                 <div id={this.props.id} className={this.props.className}>
@@ -134,11 +127,19 @@ var Loader = React.createClass({
         }
 
         return null;
-    },
+    }
 
-    render: function() {
+    render() {
         return this.renderLoader(this.props.loading);
     }
 });
+
+
+Loader.propTypes = {
+    loading: PropTypes.bool,
+        color: PropTypes.string,
+        size: PropTypes.string,
+        margin: PropTypes.string
+};
 
 module.exports = Loader;
